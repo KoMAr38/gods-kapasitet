@@ -1,0 +1,17 @@
+fylke_kode,sannsynlighet_returlast,begrunnelse
+03,0.78,Tett leverandørmarked - returlast lett tilgjengelig
+32,0.72,Lagerklynge Gardermoen/Vestby
+31,0.62,Industri og import via Svinesund
+33,0.58,Drammen havn og industri
+39,0.56,Larvik havn
+40,0.46,Begrenset industri på returstrekning
+34,0.40,Spredt bosetting - returlast sjelden
+42,0.52,Kristiansand havn
+11,0.56,Stavanger - næringsmiddelindustri
+46,0.50,Bergen - fiskeprodukter nordover
+15,0.36,Møre - få returlaster mot øst
+50,0.50,Trondheim - knutepunkt
+18,0.30,Nordland - fisk sørover dekker ikke volumet inn
+55,0.24,Troms - returlast svært begrenset
+56,0.14,Finnmark - nesten ingen returlast
+99,0.40,Ukjent fylke - landsgjennomsnitt

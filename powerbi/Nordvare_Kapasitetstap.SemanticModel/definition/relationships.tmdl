@@ -1,0 +1,66 @@
+relationship fact_kapasitet_maaned_maaned_start_dim_dato_Dato
+	fromColumn: fact_kapasitet_maaned.maaned_start
+	toColumn: dim_dato.Dato
+
+relationship fact_kapasitet_maaned_fra_fylke_kode_dim_fylke_fylke_kode
+	fromColumn: fact_kapasitet_maaned.fra_fylke_kode
+	toColumn: dim_fylke.fylke_kode
+
+relationship fact_kapasitet_maaned_til_fylke_kode_dim_fylke_fylke_kode
+	isActive: false
+	fromColumn: fact_kapasitet_maaned.til_fylke_kode
+	toColumn: dim_fylke.fylke_kode
+
+relationship fact_kapasitet_maaned_kjoretoygruppe_kode_dim_kjoretoygruppe_kjoretoygruppe_kode
+	fromColumn: fact_kapasitet_maaned.kjoretoygruppe_kode
+	toColumn: dim_kjoretoygruppe.kjoretoygruppe_kode
+
+relationship fact_kapasitet_maaned_lager_id_dim_lager_lager_id
+	fromColumn: fact_kapasitet_maaned.lager_id
+	toColumn: dim_lager.lager_id
+
+relationship fact_kapasitet_maaned_varegruppe_kode_dim_varegruppe_varegruppe_kode
+	fromColumn: fact_kapasitet_maaned.varegruppe_kode
+	toColumn: dim_varegruppe.varegruppe_kode
+
+relationship fact_etappe_dato_dim_dato_Dato
+	fromColumn: fact_etappe.dato
+	toColumn: dim_dato.Dato
+
+relationship fact_etappe_fra_fylke_kode_dim_fylke_fylke_kode
+	fromColumn: fact_etappe.fra_fylke_kode
+	toColumn: dim_fylke.fylke_kode
+
+relationship fact_etappe_kjoretoygruppe_kode_dim_kjoretoygruppe_kjoretoygruppe_kode
+	fromColumn: fact_etappe.kjoretoygruppe_kode
+	toColumn: dim_kjoretoygruppe.kjoretoygruppe_kode
+
+relationship fact_etappe_lager_id_dim_lager_lager_id
+	fromColumn: fact_etappe.lager_id
+	toColumn: dim_lager.lager_id
+
+relationship fact_etappe_varegruppe_kode_dim_varegruppe_varegruppe_kode
+	fromColumn: fact_etappe.varegruppe_kode
+	toColumn: dim_varegruppe.varegruppe_kode
+
+relationship fact_ssb_transportytelser_kvartal_start_dim_dato_Dato
+	fromColumn: fact_ssb_transportytelser.kvartal_start
+	toColumn: dim_dato.Dato
+
+relationship fact_ssb_transportytelser_aar_aar_start_dim_dato_Dato
+	fromColumn: fact_ssb_transportytelser_aar.aar_start
+	toColumn: dim_dato.Dato
+
+relationship fact_ssb_fylkesstrom_aar_start_dim_dato_Dato
+	fromColumn: fact_ssb_fylkesstrom.aar_start
+	toColumn: dim_dato.Dato
+
+relationship fact_ssb_fylkesstrom_fra_fylke_kode_dim_fylke_fylke_kode
+	fromColumn: fact_ssb_fylkesstrom.fra_fylke_kode
+	toColumn: dim_fylke.fylke_kode
+
+relationship fact_ssb_fylkesstrom_til_fylke_kode_dim_fylke_fylke_kode
+	isActive: false
+	fromColumn: fact_ssb_fylkesstrom.til_fylke_kode
+	toColumn: dim_fylke.fylke_kode
+

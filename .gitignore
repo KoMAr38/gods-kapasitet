@@ -1,0 +1,12 @@
+target/
+dbt_packages/
+logs/
+__pycache__/
+data/gods_kapasitet.duckdb
+data/gods_kapasitet.duckdb.wal
+data/raw/turer/
+data/raw/kjoretoy.csv
+powerbi/*.Report/.pbi/localSettings.json
+powerbi/*.SemanticModel/.pbi/localSettings.json
+powerbi/*.SemanticModel/.pbi/cache.abf
+.user.yml

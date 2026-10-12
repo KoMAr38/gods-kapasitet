@@ -1,0 +1,48 @@
+/// Feltparameter: landsdel, fylke, kjøretøygruppe, lager eller varegruppe. Velger hva stolpene på Hvor tapes det deles opp etter.
+table 'Vis etter'
+	lineageTag: 1fbab62f-9e23-447a-91ed-0647cd8d88aa
+
+	column 'Vis etter Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 897eba5d-47ee-427a-a00d-d9cd96286455
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+	column 'Vis etter Fields'
+		dataType: string
+		isHidden
+		lineageTag: 73308b14-fc8b-4c52-ad91-4b06d4594e7e
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Vis etter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+	/// Det stolpene deles opp etter. Velg i knapperaden på siden.
+	column 'Vis etter'
+		dataType: string
+		lineageTag: e9a12ffe-ff05-4873-a6c3-17e189b2a6e6
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Vis etter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Vis etter Fields'
+
+	partition 'Vis etter' = calculated
+		mode: import
+		source =
+				{
+				    ("Landsdel", NAMEOF('dim_fylke'[Landsdel]), 0),
+				    ("Fylke", NAMEOF('dim_fylke'[Fylke]), 1),
+				    ("Kjøretøygruppe", NAMEOF('dim_kjoretoygruppe'[Kjøretøygruppe]), 2),
+				    ("Lager", NAMEOF('dim_lager'[Lager]), 3),
+				    ("Varegruppe", NAMEOF('dim_varegruppe'[Varegruppe]), 4)
+				}
+

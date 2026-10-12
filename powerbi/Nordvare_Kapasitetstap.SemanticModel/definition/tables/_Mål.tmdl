@@ -1,0 +1,363 @@
+/// Alle mål, ordnet i visningsmapper. Ingen data.
+table _Mål
+	lineageTag: fcd1f5af-cb57-4c8c-964b-6644c66a7d8b
+
+	/// Antall etapper. En etappe er kjøring mellom to stopp, med eller uten last.
+	measure Etapper = SUM ( fact_kapasitet_maaned[antall_etapper] )
+		formatString: #,0
+		displayFolder: Kjøring
+		lineageTag: b1c7cd8b-9cb0-48c0-8172-e1fa61d8a734
+
+	/// Kjørte kilometer i millioner, med og uten last. Samme begrep og enhet som SSB (kjøretøykm).
+	measure Kjøretøykm = DIVIDE ( SUM ( fact_kapasitet_maaned[km] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kjøring
+		lineageTag: 95afef95-cec2-496d-acd6-883dd32c683a
+
+	/// Millioner km kjørt uten last (tonn = 0).
+	measure 'Kjøretøykm tom' = DIVIDE ( SUM ( fact_kapasitet_maaned[km_tom] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kjøring
+		lineageTag: 22b482d3-3846-4ed7-b7f5-8dc5f63f9160
+
+	/// Andel av kilometerne kjørt uten last. Forholdet mellom to summer, slik SSB regner det, aldri et snitt av prosenter.
+	measure 'Tomkjøring %' = DIVIDE ( SUM ( fact_kapasitet_maaned[km_tom] ), SUM ( fact_kapasitet_maaned[km] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Kjøring
+		lineageTag: a95b6b66-e2c8-4f6e-975d-eb5b8f23f13d
+
+	/// Tomkjøring på etapper tilbake mot lager. Med fylke på aksen: hvor bilene kjører tomme hjem fra.
+	measure 'Tomkjøring retur %' = CALCULATE ( [Tomkjøring %], KEEPFILTERS ( fact_kapasitet_maaned[Etappetype] = "Retur" ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Kjøring
+		lineageTag: 2f9b4115-c5e7-422a-9ec0-aabd11a022e7
+
+	/// Tomkjøring når returer med bare emballasje regnes som tomme. Forskjellen mot Tomkjøring % er tomkjøring i forkledning: bilen står som lastet, men bruker lite av nyttelasten.
+	measure 'Tomkjøring inkl. emballasje %' =
+			VAR _KmTom = SUM ( fact_kapasitet_maaned[km_tom] )
+			VAR _KmEmballasje =
+			    CALCULATE ( SUM ( fact_kapasitet_maaned[km] ), KEEPFILTERS ( fact_kapasitet_maaned[varegruppe_kode] = "RETUR" ) )
+			RETURN
+			    DIVIDE ( _KmTom + _KmEmballasje, SUM ( fact_kapasitet_maaned[km] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Kjøring
+		lineageTag: 251470fe-cb13-4eb4-a0f0-4d78ba7f3e80
+
+	/// Millioner km på etapper som ender i fylket. Bruker den inaktive relasjonen på til-fylke.
+	measure 'Kjøretøykm inn' = CALCULATE ( [Kjøretøykm], USERELATIONSHIP ( fact_kapasitet_maaned[til_fylke_kode], dim_fylke[fylke_kode] ) )
+		formatString: #,0.0
+		displayFolder: Kjøring
+		lineageTag: 5dc8ce70-acd3-4aeb-9cf6-1bb3629f1983
+
+	/// Teoretisk kapasitet i millioner tonnkm: nyttelast × km. Det bilene kunne fraktet om hver etappe gikk full.
+	measure Kapasitet = DIVIDE ( SUM ( fact_kapasitet_maaned[kapasitet_tonnkm] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kapasitet
+		lineageTag: 87c4492e-b60f-4558-a073-71be7fdb7d07
+
+	/// Fraktet gods i millioner tonnkm: tonn × km. Samme begrep og enhet som SSB.
+	measure Transportarbeid = DIVIDE ( SUM ( fact_kapasitet_maaned[tonnkm] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kapasitet
+		lineageTag: b28eb89a-bcdd-41f7-b1c9-fe50c1f86e06
+
+	/// Kapasitet tapt på etapper uten last, i millioner tonnkm. Hele nyttelasten × km går tapt.
+	measure 'Tapt tom' = DIVIDE ( SUM ( fact_kapasitet_maaned[tapt_tom_tonnkm] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kapasitet
+		lineageTag: 1a5cb4e5-7010-43cd-9c79-8ecced4965c7
+
+	/// Kapasitet tapt på lastede etapper som ikke var fulle: (nyttelast − tonn) × km, i millioner tonnkm. Overlast gir 0, ikke negativt tap.
+	measure 'Tapt delvis' = DIVIDE ( SUM ( fact_kapasitet_maaned[tapt_delvis_tonnkm] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kapasitet
+		lineageTag: 5aec5dde-c66e-4e23-9a64-afcea0fd2666
+
+	/// Tapt tom pluss tapt delvis, i millioner tonnkm. Lik kapasitet minus transportarbeid, bortsett fra at overlast ikke trekkes fra.
+	measure 'Tapt kapasitet' = DIVIDE ( SUM ( fact_kapasitet_maaned[tapt_tom_tonnkm] ) + SUM ( fact_kapasitet_maaned[tapt_delvis_tonnkm] ), 1000000 )
+		formatString: #,0.0
+		displayFolder: Kapasitet
+		lineageTag: 6f2cbaf6-4945-4eec-bae3-c2899551d0c8
+
+	/// Transportarbeid delt på kapasitet. Vektbasert: en bil full av lett volumgods ser halvtom ut.
+	measure 'Utnyttelsesgrad %' = DIVIDE ( SUM ( fact_kapasitet_maaned[tonnkm] ), SUM ( fact_kapasitet_maaned[kapasitet_tonnkm] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Kapasitet
+		lineageTag: 20e44887-b499-43de-822f-a804d6c2c273
+
+	/// Hvor stor del av den tapte kapasiteten som skyldes tomme etapper. Resten er lastede biler som ikke var fulle.
+	measure 'Tomkjøringens andel av tapet %' =
+			VAR _Tom = SUM ( fact_kapasitet_maaned[tapt_tom_tonnkm] )
+			RETURN
+			    DIVIDE ( _Tom, _Tom + SUM ( fact_kapasitet_maaned[tapt_delvis_tonnkm] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Kapasitet
+		lineageTag: 10e86b6d-0fc3-4777-aad6-bf5b29e4ec63
+
+	/// Utnyttelse bare på etapper med last. Skiller hvor fulle bilene er fra hvor ofte de kjører tomme.
+	measure 'Utnyttelse lastede etapper %' =
+			VAR _KapasitetLastet = SUM ( fact_kapasitet_maaned[kapasitet_tonnkm] ) - SUM ( fact_kapasitet_maaned[tapt_tom_tonnkm] )
+			RETURN
+			    DIVIDE ( SUM ( fact_kapasitet_maaned[tonnkm] ), _KapasitetLastet )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Kapasitet
+		lineageTag: 6d949f4c-bfac-4a24-926c-1258ef2649ec
+
+	/// Fraktet gods i 1 000 tonn, summert over etapper. Gods som lastes om telles én gang per etappe.
+	measure Godsmengde = DIVIDE ( SUM ( fact_kapasitet_maaned[tonn] ), 1000 )
+		formatString: #,0.0
+		displayFolder: Kapasitet
+		lineageTag: d8beee22-cbe1-4ae0-9615-f3a0d8638d7b
+
+	/// Transportarbeid i måneden mot snittmåneden samme år, der 100 er en vanlig måned. Bare hele år, så 2026 er utelatt. Laget for Måned på aksen og År som serie.
+	measure Sesongindeks =
+			VAR _Maaned = [Transportarbeid]
+			VAR _MaanederMedData =
+			    CALCULATE (
+			        DISTINCTCOUNT ( fact_kapasitet_maaned[maaned_start] ),
+			        REMOVEFILTERS ( dim_dato[Måned], dim_dato[Måned nr] )
+			    )
+			VAR _Snitt =
+			    CALCULATE (
+			        AVERAGEX ( VALUES ( dim_dato[Månedsstart] ), [Transportarbeid] ),
+			        REMOVEFILTERS ( dim_dato[Måned], dim_dato[Måned nr] )
+			    )
+			RETURN
+			    IF ( _MaanederMedData = 12, DIVIDE ( _Maaned, _Snitt ) * 100 )
+		formatString: 0
+		displayFolder: Sesong
+		lineageTag: d7d7b516-03f1-485a-ab7c-23df28b4b336
+
+	/// SSB 03650, nasjonal leie- og egentransport: km uten last delt på alle km. Utvalget utvides til hele kvartaler, fordi SSB publiserer per kvartal; per måned viser den kvartalet måneden ligger i.
+	measure 'SSB tomkjøring %' =
+			VAR _Kvartaler = VALUES ( dim_dato[Kvartal id] )
+			VAR _Km =
+			    CALCULATE (
+			        SUM ( fact_ssb_transportytelser[kjoretoykm_mill] ),
+			        REMOVEFILTERS ( dim_dato ),
+			        _Kvartaler,
+			        fact_ssb_transportytelser[transporttype_kode] = "01"
+			    )
+			VAR _KmMedLast =
+			    CALCULATE (
+			        SUM ( fact_ssb_transportytelser[kjoretoykm_med_last_mill] ),
+			        REMOVEFILTERS ( dim_dato ),
+			        _Kvartaler,
+			        fact_ssb_transportytelser[transporttype_kode] = "01"
+			    )
+			RETURN
+			    DIVIDE ( _Km - _KmMedLast, _Km )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: SSB
+		lineageTag: 479b2c02-2e07-4dd5-b8a2-6d337695e269
+
+	/// SSB 08478, nasjonal leie- og egentransport per år 1996 til 2025. Samme definisjon som SSB tomkjøring %.
+	measure 'SSB tomkjøring % år' =
+			VAR _Km =
+			    CALCULATE ( SUM ( fact_ssb_transportytelser_aar[kjoretoykm_mill] ), KEEPFILTERS ( fact_ssb_transportytelser_aar[transporttype_kode] = "01" ) )
+			VAR _KmMedLast =
+			    CALCULATE ( SUM ( fact_ssb_transportytelser_aar[kjoretoykm_med_last_mill] ), KEEPFILTERS ( fact_ssb_transportytelser_aar[transporttype_kode] = "01" ) )
+			RETURN
+			    DIVIDE ( _Km - _KmMedLast, _Km )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: SSB
+		lineageTag: 7211809e-9812-42a9-9817-4154e422b1a5
+
+	/// Millioner km med last i Norge, SSB 08478.
+	measure 'SSB kjøretøykm med last år' = CALCULATE ( SUM ( fact_ssb_transportytelser_aar[kjoretoykm_med_last_mill] ), KEEPFILTERS ( fact_ssb_transportytelser_aar[transporttype_kode] = "01" ) )
+		formatString: #,0
+		displayFolder: SSB
+		lineageTag: e1a8f812-33de-435b-88ee-0e6cf8051d9c
+
+	/// Millioner km uten last i Norge, SSB 08478.
+	measure 'SSB kjøretøykm tom år' =
+			CALCULATE (
+			    SUM ( fact_ssb_transportytelser_aar[kjoretoykm_mill] ) - SUM ( fact_ssb_transportytelser_aar[kjoretoykm_med_last_mill] ),
+			    KEEPFILTERS ( fact_ssb_transportytelser_aar[transporttype_kode] = "01" )
+			)
+		formatString: #,0
+		displayFolder: SSB
+		lineageTag: 05f486d8-a307-4709-ae92-45316aa690b1
+
+	/// Millioner tonn lastet i fylket (fra-fylke), SSB 09830. Prikkede celler mangler, så summen er litt lavere enn SSBs totalrad.
+	measure 'SSB godsmengde' = DIVIDE ( SUM ( fact_ssb_fylkesstrom[tonn_1000] ), 1000 )
+		formatString: #,0.0
+		displayFolder: SSB
+		lineageTag: 3088f890-cadd-4b1b-a311-08bc4bdd0e01
+
+	/// Millioner tonn losset i fylket (til-fylke). Bruker den inaktive relasjonen på til-fylke.
+	measure 'SSB godsmengde inn' = CALCULATE ( [SSB godsmengde], USERELATIONSHIP ( fact_ssb_fylkesstrom[til_fylke_kode], dim_fylke[fylke_kode] ) )
+		formatString: #,0.0
+		displayFolder: SSB
+		lineageTag: b24dd207-8777-4a15-88e0-efd1289d3cfb
+
+	/// Andel av godsmengden som lastes og losses i samme fylke, SSB 09830.
+	measure 'SSB andel innenfor fylket %' =
+			DIVIDE (
+			    CALCULATE ( [SSB godsmengde], KEEPFILTERS ( fact_ssb_fylkesstrom[Strømtype] = "Innenfor fylket" ) ),
+			    [SSB godsmengde]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: SSB
+		lineageTag: d42a1c09-52bc-4895-945e-6ae41cccc6b4
+
+	/// Nordvares tomkjøring minus SSBs for de samme kvartalene, i prosentpoeng. Negativt betyr mindre tomkjøring enn landet.
+	measure 'Tomkjøring mot SSB' =
+			VAR _Nordvare = [Tomkjøring %]
+			VAR _Ssb = [SSB tomkjøring %]
+			RETURN
+			    IF ( NOT ISBLANK ( _Nordvare ) && NOT ISBLANK ( _Ssb ), ROUND ( ( _Nordvare - _Ssb ) * 100, 1 ) )
+		formatString: """▲ ""0.0"" pp over SSB"";""▼ ""0.0"" pp under SSB"";""likt med SSB"""
+		displayFolder: SSB
+		lineageTag: ffeb40d3-2911-4532-a44c-30dd0ab8b61c
+
+	/// Kjøretøykm mot de samme månedene året før, via beregningsgruppen Tidsvindu. Relativ endring.
+	measure 'Kjøretøykm endring' = CALCULATE ( [Kjøretøykm], Tidsvindu[Tidsvindu] = "Endring mot året før" )
+		formatString: """▲ ""0.0%"" mot året før"";""▼ ""0.0%"" mot året før"";""uendret mot året før"""
+		displayFolder: Endring
+		lineageTag: 229aa5df-d424-44c4-88b3-ecd3281aec96
+
+	/// Tomkjøring % mot de samme månedene året før, via beregningsgruppen Tidsvindu. Prosentpoeng.
+	measure 'Tomkjøring endring' = CALCULATE ( [Tomkjøring %], Tidsvindu[Tidsvindu] = "Endring mot året før" )
+		formatString: """▲ ""0.0"" pp mot året før"";""▼ ""0.0"" pp mot året før"";""uendret mot året før"""
+		displayFolder: Endring
+		lineageTag: 466dad80-cc7d-4b80-873b-7a295b864e7d
+
+	/// Utnyttelsesgrad % mot de samme månedene året før, via beregningsgruppen Tidsvindu. Prosentpoeng.
+	measure 'Utnyttelsesgrad endring' = CALCULATE ( [Utnyttelsesgrad %], Tidsvindu[Tidsvindu] = "Endring mot året før" )
+		formatString: """▲ ""0.0"" pp mot året før"";""▼ ""0.0"" pp mot året før"";""uendret mot året før"""
+		displayFolder: Endring
+		lineageTag: 0f993495-0895-4ec0-b955-b2cfe6248c3d
+
+	/// Tapt kapasitet mot de samme månedene året før, via beregningsgruppen Tidsvindu. Relativ endring.
+	measure 'Tapt kapasitet endring' = CALCULATE ( [Tapt kapasitet], Tidsvindu[Tidsvindu] = "Endring mot året før" )
+		formatString: """▲ ""0.0%"" mot året før"";""▼ ""0.0%"" mot året før"";""uendret mot året før"""
+		displayFolder: Endring
+		lineageTag: 66402805-d0a7-44e5-ba44-1820d89c2426
+
+	/// Tomkjøringens andel av tapet % mot de samme månedene året før, via beregningsgruppen Tidsvindu. Prosentpoeng.
+	measure 'Tomkjøringens andel endring' = CALCULATE ( [Tomkjøringens andel av tapet %], Tidsvindu[Tidsvindu] = "Endring mot året før" )
+		formatString: """▲ ""0.0"" pp mot året før"";""▼ ""0.0"" pp mot året før"";""uendret mot året før"""
+		displayFolder: Endring
+		lineageTag: 15560a3e-db86-4833-a25a-9f0aafe65690
+
+	/// Rader i fact_etappe, den inkrementelle tabellen. Lik Etapper for samme utvalg når alle månedsfiler er lastet.
+	measure 'Etapper detalj' = COUNTROWS ( fact_etappe )
+		formatString: #,0
+		displayFolder: Etapper
+		lineageTag: 25e5e708-acd8-4e56-b9a1-7e9e9279a513
+
+	/// Etapper registrert etter at måneden var over. De lander i en måned som allerede er lastet, og er grunnen til at de to siste månedene lastes på nytt.
+	measure 'Etterregistrerte etapper' = CALCULATE ( COUNTROWS ( fact_etappe ), KEEPFILTERS ( fact_etappe[Registrering] = "Etterregistrert" ) )
+		formatString: #,0
+		displayFolder: Etapper
+		lineageTag: 7214bb65-ed7b-4a37-b1c0-6f4bd711808c
+
+	/// Andel etapper registrert etter månedsslutt.
+	measure 'Etterregistrert %' = DIVIDE ( [Etterregistrerte etapper], [Etapper detalj] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Etapper
+		lineageTag: 3df9cc9b-2270-44c1-a6aa-bb94c23e3dee
+
+	/// Etapper med mer last enn nyttelasten. Beholdes og flagges i stedet for å bli rettet eller slettet.
+	measure 'Overlastede etapper' = CALCULATE ( COUNTROWS ( fact_etappe ), KEEPFILTERS ( fact_etappe[Laststatus] = "Overlast" ) )
+		formatString: #,0
+		displayFolder: Etapper
+		lineageTag: 191081d0-5cf5-4893-a550-3da2f359c772
+
+	/// Antall måneder i fact_etappe. Én parquet-fil per måned, og én partisjon per måned i tjenesten for de to siste månedene.
+	measure Partisjoner = DISTINCTCOUNT ( fact_etappe[Partisjon] )
+		formatString: 0
+		displayFolder: Etapper
+		lineageTag: 3db5447e-a688-4a77-ada5-76453e366ad1
+
+	/// Flest dager fra månedsslutt til registrering. Må være kortere enn vinduet som lastes på nytt (2 måneder), ellers mister inkrementell oppdatering rader.
+	measure 'Lengste etterregistrering' = MAX ( fact_etappe[Dager etter månedsslutt] )
+		formatString: """lengste forsinkelse: ""0"" dager"""
+		displayFolder: Etapper
+		lineageTag: 3b18a3d0-bdb9-473f-b17a-c54e28cbdac6
+
+	/// Kjøretøy med minst én etappe i utvalget.
+	measure 'Kjøretøy i drift' = DISTINCTCOUNT ( fact_etappe[kjoretoy_id] )
+		formatString: #,0
+		displayFolder: Etapper
+		lineageTag: 646b637f-a8e5-40d7-b85a-06d52d72fdb3
+
+	/// Siste dato i fact_etappe uansett filter. Viser at siste månedsfil er lastet.
+	measure 'Data til og med' = CALCULATE ( MAX ( fact_etappe[dato] ), REMOVEFILTERS () )
+		formatString: dd.mm.yyyy
+		displayFolder: Etapper
+		lineageTag: caf210a7-a2e5-4786-85d3-bfc54415162d
+
+	/// Kontrolltall: km i fact_etappe minus km i fact_kapasitet_maaned for samme utvalg. Skal være 0.
+	measure 'Avvik km detalj mot aggregat' = SUM ( fact_etappe[km] ) - SUM ( fact_kapasitet_maaned[km] )
+		formatString: #,0
+		displayFolder: Etapper
+		lineageTag: 6423c0f9-c922-40c7-9f19-e5c02a7c77c7
+
+	/// x i kartet: ankerbyens lengdegrad. Brukes bare i punktdiagrammet på Godsstrømmer.
+	measure 'Kart X' = MIN ( dim_fylke[kart_x] )
+		formatString: 0.00
+		isHidden
+		displayFolder: Visning
+		lineageTag: 2d2b1e39-b4ad-4680-a2ec-478f9ee36154
+
+	/// y i kartet: Mercator-y for ankerbyen, samme projeksjon som bakgrunnsbildet.
+	measure 'Kart Y' = MIN ( dim_fylke[kart_y] )
+		formatString: 0.00
+		isHidden
+		displayFolder: Visning
+		lineageTag: c54c029d-c6cf-4f94-9e8c-1df78efed07a
+
+	/// Stolpefarge per varegruppe: gull for vektbegrenset, cyan for volumbegrenset, rosa for tomkjøring.
+	measure 'Farge begrensning' =
+			SWITCH (
+			    SELECTEDVALUE ( dim_varegruppe[Begrensning] ),
+			    "Vekt", "#F5C26B",
+			    "Volum", "#38BDF8",
+			    "#FF6B8B"
+			)
+		isHidden
+		displayFolder: Visning
+		lineageTag: 485b6ca0-4035-4855-b26d-a22bb70588af
+
+	/// Turkis for de to siste månedene, som tjenesten laster på nytt ved hver oppdatering. De andre er arkiv.
+	measure 'Farge partisjon' =
+			VAR _Siste = CALCULATE ( MAX ( fact_etappe[dato] ), REMOVEFILTERS () )
+			VAR _Grense = FORMAT ( EDATE ( _Siste, -1 ), "yyyy-mm" )
+			RETURN
+			    IF ( SELECTEDVALUE ( fact_etappe[Partisjon] ) >= _Grense, "#2DD4BF", "#33415E" )
+		isHidden
+		displayFolder: Visning
+		lineageTag: 27874f9a-bbe7-4402-b73e-6e39d8fa6a51
+
+	/// Valgt tidsrom som tekst, begrenset til måneder med data. Til sidetopper.
+	measure Tidsrom =
+			VAR _Fra = CALCULATE ( MIN ( dim_dato[Dato] ), dim_dato[Har data] = TRUE () )
+			VAR _Til = CALCULATE ( MAX ( dim_dato[Dato] ), dim_dato[Har data] = TRUE () )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _Fra ), "Ingen data i utvalget",
+			        YEAR ( _Fra ) = YEAR ( _Til ) && MONTH ( _Fra ) = 1 && MONTH ( _Til ) = 12, FORMAT ( _Fra, "yyyy" ),
+			        FORMAT ( _Fra, "mmm yyyy", "nb-NO" ) & " – " & FORMAT ( _Til, "mmm yyyy", "nb-NO" )
+			    )
+		isHidden
+		displayFolder: Visning
+		lineageTag: c4889c46-c52f-4478-8603-19a26a913f67
+
+	column Dummy
+		dataType: string
+		isHidden
+		lineageTag: 34400f52-3d0c-474b-9aff-391660ef6a14
+		summarizeBy: none
+		sourceColumn: Dummy
+
+	partition _Mål = m
+		mode: import
+		source =
+				let
+				    Kilde = #table(type table [Dummy = text], {})
+				in
+				    Kilde
+

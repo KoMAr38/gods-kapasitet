@@ -1,0 +1,52 @@
+/// Nordvares varegrupper med NST 2007-kode. TOM er raden for etapper uten last.
+table dim_varegruppe
+	lineageTag: 8f40caed-f479-4e80-aef6-35c8239d76de
+
+	column varegruppe_kode
+		dataType: string
+		isHidden
+		lineageTag: 07d18f91-1040-46dd-940f-12a497f78cc6
+		summarizeBy: none
+		sourceColumn: varegruppe_kode
+
+	/// Returemballasje regnes som last, men bruker lite av nyttelasten.
+	column Varegruppe
+		dataType: string
+		lineageTag: 4fb5f665-ab6e-414b-9b25-8c66f5118c65
+		summarizeBy: none
+		sourceColumn: varegruppe_navn
+		sortByColumn: Sortering
+
+	/// Varegruppen i SSBs klassifikasjon NST 2007. Tom for TOM.
+	column NST-varegruppe
+		dataType: string
+		lineageTag: 5643fafe-d4a8-4fcc-8f58-c15116426c0c
+		summarizeBy: none
+		sourceColumn: nst_navn
+
+	/// Hva som fyller bilen først: volum eller vekt. Utnyttelsen er vektbasert, så volumgods ser halvtomt ut selv når bilen er full.
+	column Begrensning
+		dataType: string
+		lineageTag: 2fb34eac-2a1b-4708-a2e3-44e52faf0c31
+		summarizeBy: none
+		sourceColumn: begrensning
+
+	/// Etter typisk utnyttelse, høyest først. TOM sist.
+	column Sortering
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fb8901df-c9a8-4711-bbf0-35752bb19da9
+		summarizeBy: none
+		sourceColumn: sortering
+
+	partition dim_varegruppe = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("dim_varegruppe.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"varegruppe_kode", "varegruppe_navn", "nst_navn", "begrensning", "sortering"}),
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"sortering", Int64.Type}}, "en-US")
+				in
+				    Typer
+

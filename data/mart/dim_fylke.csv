@@ -1,0 +1,17 @@
+fylke_kode,fylke_navn,landsdel,landsdel_sortering,breddegrad,lengdegrad,ankerby,kart_x,kart_y
+03,Oslo,Østlandet,1,59.91,10.75,Oslo,10.75,75.27637363613202
+11,Rogaland,Vestlandet,3,58.97,5.73,Stavanger,5.73,73.4274429374145
+15,Møre og Romsdal,Vestlandet,3,62.47,6.15,Ålesund,6.15,80.59197375228344
+18,Nordland,Nord-Norge,5,67.28,14.4,Bodø,14.4,91.95419299639853
+31,Østfold,Østlandet,1,59.28,11.11,Sarpsborg,11.11,74.03153987545386
+32,Akershus,Østlandet,1,59.96,11.05,Lillestrøm,11.05,75.3761776127555
+33,Buskerud,Østlandet,1,59.74,10.2,Drammen,10.2,74.93816042503596
+34,Innlandet,Østlandet,1,60.79,11.07,Hamar,11.07,77.05535328889961
+39,Vestfold,Østlandet,1,59.27,10.41,Tønsberg,10.41,74.01196726479309
+40,Telemark,Østlandet,1,59.21,9.61,Skien,9.61,73.8946521198874
+42,Agder,Sørlandet,2,58.15,8.0,Kristiansand,8.0,71.85528809268826
+46,Vestland,Vestlandet,3,60.39,5.32,Bergen,5.32,76.2407698466266
+50,Trøndelag,Trøndelag,4,63.43,10.4,Trondheim,10.4,82.70315493432108
+55,Troms,Nord-Norge,5,69.65,18.96,Tromsø,18.96,98.41711934260879
+56,Finnmark,Nord-Norge,5,69.97,23.27,Alta,23.27,99.3443134192027
+99,Ukjent,Ukjent,9,,,,,

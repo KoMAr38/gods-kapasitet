@@ -1,0 +1,63 @@
+/// Beregningsgruppe: valgt periode, året før og endring mot året før. Brukes som filter på visualer og i kolonnene i matrisen på Hvor tapes det.
+table Tidsvindu
+	lineageTag: 95516d7c-0dd1-4fad-a7ab-1b6dd4fdfcec
+
+	/// Sammenligner med de samme månedene året før. Bare måneder med Nordvare-data teller, så et halvår sammenlignes med samme halvår i fjor. Endring gir prosentpoeng for andeler (mål med % i navnet) og relativ endring for alt annet.
+	calculationGroup
+		precedence: 10
+
+		/// Målet slik det er, uten tidsforskyvning.
+		calculationItem 'Valgt periode' = SELECTEDMEASURE ()
+
+		/// Samme måneder ett år tidligere. dim_dato er merket som datotabell, så DATEADD erstatter årsfilteret i stedet for å snævre det inn.
+		calculationItem 'Året før' =
+				VAR _Datoer =
+				    CALCULATETABLE ( VALUES ( dim_dato[Dato] ), dim_dato[Har data] = TRUE () )
+				RETURN
+				    CALCULATE ( SELECTEDMEASURE (), DATEADD ( _Datoer, -1, YEAR ) )
+
+		/// Valgt periode mot året før. Andeler gir prosentpoeng, alt annet relativ endring. Tomt når året før mangler data.
+		/// Avrundet til én desimal slik den vises, så en endring på -0,04 pp blir "= 0,0 pp" og ikke "▼ 0,0 pp".
+		/// Andel kjennes på % i målnavnet. SELECTEDMEASUREFORMATSTRING kan ikke brukes i selve verdien: der returnerer den formatet
+		/// dette elementet allerede har gitt, og da byttes prosentpoeng og prosent om.
+		calculationItem 'Endring mot året før' =
+				VAR _Datoer =
+				    CALCULATETABLE ( VALUES ( dim_dato[Dato] ), dim_dato[Har data] = TRUE () )
+				VAR _Naa = SELECTEDMEASURE ()
+				VAR _Fjor =
+				    CALCULATE ( SELECTEDMEASURE (), DATEADD ( _Datoer, -1, YEAR ) )
+				RETURN
+				    IF (
+				        NOT ISBLANK ( _Naa ) && NOT ISBLANK ( _Fjor ),
+				        IF (
+				            CONTAINSSTRING ( SELECTEDMEASURENAME (), "%" ),
+				            ROUND ( ( _Naa - _Fjor ) * 100, 1 ),
+				            ROUND ( DIVIDE ( _Naa - _Fjor, _Fjor ), 3 )
+				        )
+				    )
+
+			formatStringDefinition =
+					IF (
+					    CONTAINSSTRING ( SELECTEDMEASURENAME (), "%" ),
+					    """▲ ""0.0"" pp"";""▼ ""0.0"" pp"";""= ""0.0"" pp""",
+					    """▲ ""0.0%;""▼ ""0.0%;""= ""0.0%"
+					)
+
+	/// Valgt periode, Året før eller Endring mot året før. Settes som filter på et visual eller legges i kolonnene i en matrise.
+	column Tidsvindu
+		dataType: string
+		lineageTag: 5e5d4583-81c2-494a-923a-7fcd42052535
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c231906d-6be6-4cee-bf7a-f07c0e480a08
+		summarizeBy: none
+		sourceColumn: Ordinal
+
+	partition Partition_Tidsvindu = calculationGroup
+

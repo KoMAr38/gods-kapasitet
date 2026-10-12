@@ -1,0 +1,43 @@
+name: gods_kapasitet
+version: "1.0.0"
+config-version: 2
+profile: gods_kapasitet
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  raw_mappe: "data/raw"
+  # Hvor mange måneder bakover som lastes på nytt ved inkrementell kjøring.
+  # 1 = siste måned i tabellen + den nye. Begrunnelse i README (etterregistrering).
+  reload_maaneder: 1
+
+models:
+  gods_kapasitet:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  gods_kapasitet:
+    +schema: seeds
+    fylke:
+      +column_types: {fylke_kode: varchar}
+    fylke_bro:
+      +column_types: {historisk_kode: varchar, fylke_kode: varchar}
+    varegruppe:
+      +column_types: {nst_kode: varchar}
+    lager:
+      +column_types: {fylke_kode: varchar}
+    ssb_kalibrering_retur:
+      +column_types: {fylke_kode: varchar}

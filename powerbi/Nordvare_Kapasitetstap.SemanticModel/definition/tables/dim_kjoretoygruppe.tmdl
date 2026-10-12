@@ -1,0 +1,53 @@
+/// Tre kjøretøygrupper med fast nyttelast.
+table dim_kjoretoygruppe
+	lineageTag: 428477a7-e314-4ad2-8dac-f96cd629f6cd
+
+	column kjoretoygruppe_kode
+		dataType: string
+		isHidden
+		lineageTag: 83d7e428-54b1-4f65-97fd-72197da3802b
+		summarizeBy: none
+		sourceColumn: kjoretoygruppe_kode
+
+	/// Distribusjonsbil, semitrailer eller modulvogntog.
+	column Kjøretøygruppe
+		dataType: string
+		lineageTag: 9a9d6d4e-faf5-4d92-8afb-eb7ce01d8fa7
+		summarizeBy: none
+		sourceColumn: kjoretoygruppe_navn
+		sortByColumn: Sortering
+
+	/// Nyttelast per bil i gruppen.
+	column 'Nyttelast tonn'
+		dataType: int64
+		formatString: 0
+		lineageTag: 716bff40-d5fd-4e0d-9c08-5d00787d4851
+		summarizeBy: none
+		sourceColumn: nyttelast_tonn
+
+	/// Hva gruppen brukes til hos Nordvare.
+	column 'Typisk bruk'
+		dataType: string
+		lineageTag: b6b5f699-d8f2-482a-ac1e-18302eb573e9
+		summarizeBy: none
+		sourceColumn: typisk_bruk
+
+	/// Minst til størst.
+	column Sortering
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 45047937-8a41-488d-9360-4c2dbe32fbf1
+		summarizeBy: none
+		sourceColumn: sortering
+
+	partition dim_kjoretoygruppe = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("dim_kjoretoygruppe.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"kjoretoygruppe_kode", "kjoretoygruppe_navn", "nyttelast_tonn", "typisk_bruk", "sortering"}),
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"nyttelast_tonn", Int64.Type}, {"sortering", Int64.Type}}, "en-US")
+				in
+				    Typer
+

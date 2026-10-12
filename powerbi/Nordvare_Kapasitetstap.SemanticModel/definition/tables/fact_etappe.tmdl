@@ -1,0 +1,158 @@
+/// Én rad per etappe, 687 666 rader i 42 månedsfiler (parquet). Inkrementell: RangeStart og RangeEnd velger hvilke filer som leses, og i tjenesten lastes bare de to siste månedene på nytt. Brukes på siden Etapper og i kontrolltallene.
+table fact_etappe
+	lineageTag: 33988e73-31fb-41dc-8661-cd3f4cbdb494
+
+	refreshPolicy
+		policyType: basic
+		rollingWindowGranularity: year
+		rollingWindowPeriods: 3
+		incrementalGranularity: month
+		incrementalPeriods: 2
+		sourceExpression =
+			let
+			    // Kolonnene modellen bruker. Parquet-leseren hopper over resten av filen.
+			    Kolonner = {"dato", "partisjon", "kjoretoy_id", "kjoretoygruppe_kode", "lager_id", "etappetype", "fra_fylke_kode", "varegruppe_kode", "km", "tonnkm", "kapasitet_tonnkm", "laststatus", "registrering", "dager_etter_maanedsslutt"},
+			    Kilde = Folder.Files(MartMappe & "fact_etappe"),
+			    // fact_etappe_2026-06.parquet -> 2026-06-01. Filnavnet er partisjonsnøkkelen.
+			    // Folder.Files folder ikke, så vinduet velger hele filer før de leses. Hver fil er én måned,
+			    // og partisjonene i tjenesten starter alltid på en månedsgrense, så ingen rad må filtreres etterpå.
+			    IVinduet = Table.SelectRows(Kilde, each Text.EndsWith([Name], ".parquet") and (
+			        let Maaned = Date.FromText(Text.Middle([Name], 12, 7) & "-01")
+			        in Maaned >= Date.From(RangeStart) and Maaned < Date.From(RangeEnd))),
+			    Lest = List.Transform(IVinduet[Content], each Table.SelectColumns(Parquet.Document(_), Kolonner)),
+			    // Et vindu uten filer gir en tom tabell med de samme kolonnene i stedet for en feil
+			    Samlet = if List.IsEmpty(Lest) then #table(Kolonner, {}) else Table.Combine(Lest),
+			    Typer = Table.TransformColumnTypes(Samlet, {{"dato", type date}, {"km", Currency.Type}, {"tonnkm", Currency.Type}, {"kapasitet_tonnkm", Currency.Type}, {"dager_etter_maanedsslutt", Int64.Type}})
+			in
+			    Typer
+
+	/// Dagen etappen ble kjørt. Nøkkel mot dim_dato.
+	column dato
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 8d188680-f04e-46b0-8645-5dde8a5d209b
+		summarizeBy: none
+		sourceColumn: dato
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Måneden etappen hører til, yyyy-mm. Samme nøkkel som filnavnet og partisjonen i tjenesten.
+	column Partisjon
+		dataType: string
+		lineageTag: 84443c0d-d713-4de6-aa3c-29f3b56c3014
+		summarizeBy: none
+		sourceColumn: partisjon
+
+	/// NV0001 til NV0300.
+	column kjoretoy_id
+		dataType: string
+		isHidden
+		lineageTag: f604b680-d4fd-406f-8a1b-0613c7fbaceb
+		summarizeBy: none
+		sourceColumn: kjoretoy_id
+
+	column kjoretoygruppe_kode
+		dataType: string
+		isHidden
+		lineageTag: 790dc78c-c123-4540-959e-78375770353d
+		summarizeBy: none
+		sourceColumn: kjoretoygruppe_kode
+
+	column lager_id
+		dataType: string
+		isHidden
+		lineageTag: 55254ada-777f-42c5-9772-0308c78ec0de
+		summarizeBy: none
+		sourceColumn: lager_id
+
+	/// Utgående eller Retur.
+	column Etappetype
+		dataType: string
+		lineageTag: 36596570-7989-41f3-94f8-17cf66d89953
+		summarizeBy: none
+		sourceColumn: etappetype
+
+	column fra_fylke_kode
+		dataType: string
+		isHidden
+		lineageTag: 5242355c-246c-4368-8187-2ee9f594344d
+		summarizeBy: none
+		sourceColumn: fra_fylke_kode
+
+	column varegruppe_kode
+		dataType: string
+		isHidden
+		lineageTag: 1c6d0684-4767-45e3-b287-2267f6eb2b28
+		summarizeBy: none
+		sourceColumn: varegruppe_kode
+
+	column km
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 6e841ca2-3712-4b01-b194-3153ef9f7cf2
+		summarizeBy: none
+		sourceColumn: km
+
+	column tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 8c5bddec-62a4-4c82-bb42-ddf83b3cda9c
+		summarizeBy: none
+		sourceColumn: tonnkm
+
+	column kapasitet_tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 4daf6607-2e2b-4d80-aaa9-1130478be459
+		summarizeBy: none
+		sourceColumn: kapasitet_tonnkm
+
+	/// Tom (tonn = 0), Lastet eller Overlast (tonn over nyttelast, beholdt og flagget).
+	column Laststatus
+		dataType: string
+		lineageTag: 635bba91-1613-4f84-806d-171a1ce6fdca
+		summarizeBy: none
+		sourceColumn: laststatus
+
+	/// I tide eller Etterregistrert (registrert etter at måneden var over).
+	column Registrering
+		dataType: string
+		lineageTag: c724288d-c99f-42d6-b465-c80d3c1bdf7b
+		summarizeBy: none
+		sourceColumn: registrering
+
+	/// Dager fra månedsslutt til etappen ble registrert. 0 når den kom inn i samme måned.
+	column 'Dager etter månedsslutt'
+		dataType: int64
+		formatString: 0
+		lineageTag: c5dc8fbd-e6a2-4c7c-948f-fb625cd39c3c
+		summarizeBy: none
+		sourceColumn: dager_etter_maanedsslutt
+
+	partition fact_etappe = m
+		mode: import
+		source =
+				let
+				    // Kolonnene modellen bruker. Parquet-leseren hopper over resten av filen.
+				    Kolonner = {"dato", "partisjon", "kjoretoy_id", "kjoretoygruppe_kode", "lager_id", "etappetype", "fra_fylke_kode", "varegruppe_kode", "km", "tonnkm", "kapasitet_tonnkm", "laststatus", "registrering", "dager_etter_maanedsslutt"},
+				    Kilde = Folder.Files(MartMappe & "fact_etappe"),
+				    // fact_etappe_2026-06.parquet -> 2026-06-01. Filnavnet er partisjonsnøkkelen.
+				    // Folder.Files folder ikke, så vinduet velger hele filer før de leses. Hver fil er én måned,
+				    // og partisjonene i tjenesten starter alltid på en månedsgrense, så ingen rad må filtreres etterpå.
+				    IVinduet = Table.SelectRows(Kilde, each Text.EndsWith([Name], ".parquet") and (
+				        let Maaned = Date.FromText(Text.Middle([Name], 12, 7) & "-01")
+				        in Maaned >= Date.From(RangeStart) and Maaned < Date.From(RangeEnd))),
+				    Lest = List.Transform(IVinduet[Content], each Table.SelectColumns(Parquet.Document(_), Kolonner)),
+				    // Et vindu uten filer gir en tom tabell med de samme kolonnene i stedet for en feil
+				    Samlet = if List.IsEmpty(Lest) then #table(Kolonner, {}) else Table.Combine(Lest),
+				    Typer = Table.TransformColumnTypes(Samlet, {{"dato", type date}, {"km", Currency.Type}, {"tonnkm", Currency.Type}, {"kapasitet_tonnkm", Currency.Type}, {"dager_etter_maanedsslutt", Int64.Type}})
+				in
+				    Typer
+

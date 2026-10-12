@@ -1,0 +1,67 @@
+/// Fylker etter 2024-inndelingen pluss Ukjent (99). Brukes både som fra- og til-fylke: aktiv relasjon på fra-fylke, inaktiv på til-fylke.
+table dim_fylke
+	lineageTag: db0d88bc-3477-4282-9b63-ed2ece09b2a0
+
+	/// To siffer som i SSB, for eksempel 03 for Oslo.
+	column fylke_kode
+		dataType: string
+		isHidden
+		lineageTag: b27a658e-1a68-4745-9fda-56cfe516ff56
+		summarizeBy: none
+		sourceColumn: fylke_kode
+
+	/// Fylket etappen eller godsstrømmen starter i, så lenge ikke et mål sier noe annet.
+	column Fylke
+		dataType: string
+		lineageTag: 312632dd-e84a-4879-8e58-2fc300cbf7b4
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: fylke_navn
+
+	/// Østlandet, Sørlandet, Vestlandet, Trøndelag eller Nord-Norge.
+	column Landsdel
+		dataType: string
+		lineageTag: 81cd75d1-907f-4f33-a463-f9f3c1de0e68
+		summarizeBy: none
+		sourceColumn: landsdel
+		sortByColumn: 'Landsdel nr'
+
+	/// Sør til nord, så landsdelene kommer i geografisk rekkefølge.
+	column 'Landsdel nr'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4b19c9c4-aa31-4988-b76d-cebf604289fd
+		summarizeBy: none
+		sourceColumn: landsdel_sortering
+
+	/// Lengdegrad for fylkets ankerby. x i kartet på Godsstrømmer.
+	column kart_x
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		isAvailableInMdx: false
+		lineageTag: a2f93c71-1614-45f5-bbce-efb7a8bf0b9e
+		summarizeBy: none
+		sourceColumn: kart_x
+
+	/// Mercator-y for ankerbyen: ln(tan(45° + breddegrad/2)) i grader. Samme projeksjon som bakgrunnskartet.
+	column kart_y
+		dataType: decimal
+		isHidden
+		formatString: 0.00
+		isAvailableInMdx: false
+		lineageTag: fffb4a7c-0662-44df-a3bc-3d47d144095d
+		summarizeBy: none
+		sourceColumn: kart_y
+
+	partition dim_fylke = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("dim_fylke.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"fylke_kode", "fylke_navn", "landsdel", "landsdel_sortering", "kart_x", "kart_y"}),
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"landsdel_sortering", Int64.Type}, {"kart_x", Currency.Type}, {"kart_y", Currency.Type}}, "en-US")
+				in
+				    Typer
+

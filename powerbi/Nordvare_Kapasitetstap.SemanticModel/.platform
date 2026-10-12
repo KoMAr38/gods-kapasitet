@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Nordvare_Kapasitetstap"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4d1b979b-4ded-4d3a-9dad-3fade4439170"
+  }
+}

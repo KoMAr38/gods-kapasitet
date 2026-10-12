@@ -1,0 +1,23 @@
+version: 2
+models:
+  - name: stg_etapper
+    columns:
+      - name: etappe_id
+        tests: [unique, not_null]
+      - name: partisjon
+        tests: [not_null]
+      - name: sekvens
+        tests:
+          - accepted_values: {values: [1, 2], quote: false}
+  - name: stg_kjoretoy
+    columns:
+      - name: kjoretoy_id
+        tests: [unique, not_null]
+  - name: stg_ssb_transportytelser_kvartal
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "transporttype_kode, periode, statistikkvariabel"
+  - name: stg_ssb_fylkesmatrise
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "fra_kode_historisk, til_kode_historisk, aar, statistikkvariabel"

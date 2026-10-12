@@ -1,0 +1,127 @@
+version: 2
+models:
+  - name: dim_dato
+    columns:
+      - name: dato
+        tests: [unique, not_null]
+      - name: maaned_id
+        tests: [not_null]
+  - name: dim_fylke
+    columns:
+      - name: fylke_kode
+        tests: [unique, not_null]
+  - name: dim_varegruppe
+    columns:
+      - name: varegruppe_kode
+        tests: [unique, not_null]
+  - name: dim_kjoretoygruppe
+    columns:
+      - name: kjoretoygruppe_kode
+        tests: [unique, not_null]
+  - name: dim_lager
+    columns:
+      - name: lager_id
+        tests: [unique, not_null]
+  - name: dim_kjoretoy
+    columns:
+      - name: kjoretoy_id
+        tests: [unique, not_null]
+      - name: nyttelast_tonn
+        tests: [not_null]
+      - name: hjemfylke_kode
+        tests:
+          - relationships: {to: ref('dim_fylke'), field: fylke_kode}
+  - name: fact_etappe
+    columns:
+      - name: etappe_id
+        tests: [unique, not_null]
+      - name: dato
+        tests:
+          - not_null
+          - relationships: {to: ref('dim_dato'), field: dato}
+      - name: kjoretoy_id
+        tests:
+          - relationships: {to: ref('dim_kjoretoy'), field: kjoretoy_id}
+      - name: kjoretoygruppe_kode
+        tests:
+          - relationships: {to: ref('dim_kjoretoygruppe'), field: kjoretoygruppe_kode}
+      - name: lager_id
+        tests:
+          - relationships: {to: ref('dim_lager'), field: lager_id}
+      - name: fra_fylke_kode
+        tests:
+          - relationships: {to: ref('dim_fylke'), field: fylke_kode}
+      - name: til_fylke_kode
+        tests:
+          - not_null
+          - relationships: {to: ref('dim_fylke'), field: fylke_kode}
+      - name: varegruppe_kode
+        tests:
+          - not_null
+          - relationships: {to: ref('dim_varegruppe'), field: varegruppe_kode}
+      - name: km
+        tests: [not_null]
+      - name: tonn
+        tests: [not_null]
+      - name: maaned_start
+        tests: [not_null]
+  - name: fact_kapasitet_maaned
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "maaned_id, fra_fylke_kode, til_fylke_kode, kjoretoygruppe_kode, lager_id, varegruppe_kode, etappetype"
+    columns:
+      - name: maaned_start
+        tests:
+          - relationships: {to: ref('dim_dato'), field: dato}
+  - name: fact_ssb_transportytelser
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "transporttype_kode, periode"
+    columns:
+      - name: tomkjoring_pst
+        tests: [not_null]
+      - name: kvartal_start
+        tests:
+          - relationships: {to: ref('dim_dato'), field: dato}
+  - name: fact_ssb_transportytelser_aar
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "transporttype_kode, aar"
+    columns:
+      - name: aar_start
+        tests:
+          - relationships: {to: ref('dim_dato'), field: dato}
+  - name: fact_ssb_fylkesstrom
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "aar, fra_fylke_kode, til_fylke_kode"
+    columns:
+      - name: aar_start
+        tests:
+          - relationships: {to: ref('dim_dato'), field: dato}
+      - name: fra_fylke_kode
+        tests:
+          - relationships: {to: ref('dim_fylke'), field: fylke_kode}
+      - name: til_fylke_kode
+        tests:
+          - relationships: {to: ref('dim_fylke'), field: fylke_kode}
+  - name: fact_ssb_avstand
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "aar, avstandsklasse_kode, nst_kode"
+  - name: fact_ssb_vareslag
+    tests:
+      - dbt_utils_lite_unique_combination:
+          kolonner: "vareslag_kode, periode"
+seeds:
+  - name: fylke_bro
+    columns:
+      - name: fylke_kode
+        tests:
+          - relationships: {to: ref('dim_fylke'), field: fylke_kode}
+      - name: andel
+        tests: [not_null]
+  - name: ssb_kalibrering_retur
+    columns:
+      - name: fylke_kode
+        tests: [unique, not_null]

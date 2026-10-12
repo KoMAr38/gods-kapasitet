@@ -1,0 +1,72 @@
+/// SSB 09830: tonn og tonnkm fra fylke til fylke per år 2003 til 2025, omkodet til 2024-fylker i dbt. Prikket hos SSB, så summen av cellene er 0,1 til 1,2 % lavere enn SSBs totalrad. Koblet til dim_dato på årsstart.
+table fact_ssb_fylkesstrom
+	lineageTag: f979581d-a006-4910-92cb-3381873c15a6
+
+	column aar_start
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 681d8cc2-f745-49f2-9a1a-550166271440
+		summarizeBy: none
+		sourceColumn: aar_start
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fra_fylke_kode
+		dataType: string
+		isHidden
+		lineageTag: 9fd66ad8-2aa0-49bc-b5ec-f2708ae81eab
+		summarizeBy: none
+		sourceColumn: fra_fylke_kode
+
+	column til_fylke_kode
+		dataType: string
+		isHidden
+		lineageTag: cad2e562-47ac-4daf-bb38-3c15d6d734cf
+		summarizeBy: none
+		sourceColumn: til_fylke_kode
+
+	/// Fra-fylke → til-fylke, for eksempel Oslo → Akershus.
+	column Strøm
+		dataType: string
+		lineageTag: dc654f9d-8ca0-4ab0-8c1a-099142fb1696
+		summarizeBy: none
+		sourceColumn: strom
+
+	/// Innenfor fylket (lastet og losset i samme fylke) eller Mellom fylker.
+	column Strømtype
+		dataType: string
+		lineageTag: 0b6ad751-44ef-4f01-ba1e-a3e8d5b1a3f3
+		summarizeBy: none
+		sourceColumn: stromtype
+
+	column tonn_1000
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: d9265bc9-2dd6-4c9c-a85f-ed29c55765df
+		summarizeBy: none
+		sourceColumn: tonn_1000
+
+	column transportarbeid_mill_tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 1fa0bbf7-709a-4899-a471-491be8f283eb
+		summarizeBy: none
+		sourceColumn: transportarbeid_mill_tonnkm
+
+	partition fact_ssb_fylkesstrom = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("fact_ssb_fylkesstrom.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"aar_start", "fra_fylke_kode", "til_fylke_kode", "strom", "er_internt", "tonn_1000", "transportarbeid_mill_tonnkm"}),
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"aar_start", type date}, {"er_internt", type logical}, {"tonn_1000", Currency.Type}, {"transportarbeid_mill_tonnkm", Currency.Type}}, "en-US"),
+				    MedType = Table.AddColumn(Typer, "stromtype", each if [er_internt] then "Innenfor fylket" else "Mellom fylker", type text),
+				    UtenFlagg = Table.RemoveColumns(MedType, {"er_internt"})
+				in
+				    UtenFlagg
+

@@ -1,0 +1,39 @@
+historisk_kode,historisk_navn,gyldig_fra,gyldig_til,fylke_kode,andel,andel_grunnlag
+01,Østfold (-2019),2003,2019,31,1.0000,identitet
+02,Akershus (-2019),2003,2019,32,1.0000,identitet
+03,Oslo,2003,9999,03,1.0000,identitet
+04,Hedmark (-2019),2003,2019,34,1.0000,sammenslaaing
+05,Oppland (-2019),2003,2019,34,1.0000,sammenslaaing
+06,Buskerud (-2019),2003,2019,33,1.0000,identitet
+07,Vestfold (-2019),2003,2019,39,1.0000,identitet
+08,Telemark (-2019),2003,2019,40,1.0000,identitet
+09,Aust-Agder (-2019),2003,2019,42,1.0000,sammenslaaing
+10,Vest-Agder (-2019),2003,2019,42,1.0000,sammenslaaing
+11,Rogaland,2003,9999,11,1.0000,identitet
+12,Hordaland (-2019),2003,2019,46,1.0000,sammenslaaing
+14,Sogn og Fjordane (-2019),2003,2019,46,1.0000,sammenslaaing
+15,Møre og Romsdal,2003,9999,15,1.0000,identitet
+16,Sør-Trøndelag (-2017),2003,2017,50,1.0000,sammenslaaing
+17,Nord-Trøndelag (-2017),2003,2017,50,1.0000,sammenslaaing
+18,Nordland,2003,9999,18,1.0000,identitet
+19,Troms (-2019),2003,2019,55,1.0000,identitet
+20,Finnmark (-2019),2003,2019,56,1.0000,identitet
+30,Viken (2020-2023),2020,2023,31,0.1955,tonn_2019_09830
+30,Viken (2020-2023),2020,2023,32,0.5667,tonn_2019_09830
+30,Viken (2020-2023),2020,2023,33,0.2378,tonn_2019_09830
+34,Innlandet,2020,9999,34,1.0000,identitet
+38,Vestfold og Telemark (2020-2023),2020,2023,39,0.6164,tonn_2019_09830
+38,Vestfold og Telemark (2020-2023),2020,2023,40,0.3836,tonn_2019_09830
+42,Agder,2020,9999,42,1.0000,identitet
+46,Vestland,2020,9999,46,1.0000,identitet
+50,Trøndelag,2018,9999,50,1.0000,identitet
+54,Troms og Finnmark (2020-2023),2020,2023,55,0.8049,tonn_2019_09830
+54,Troms og Finnmark (2020-2023),2020,2023,56,0.1951,tonn_2019_09830
+31,Østfold,2024,9999,31,1.0000,identitet
+32,Akershus,2024,9999,32,1.0000,identitet
+33,Buskerud,2024,9999,33,1.0000,identitet
+39,Vestfold,2024,9999,39,1.0000,identitet
+40,Telemark,2024,9999,40,1.0000,identitet
+55,Troms,2024,9999,55,1.0000,identitet
+56,Finnmark,2024,9999,56,1.0000,identitet
+99,Ukjent fylke,2003,9999,99,1.0000,identitet

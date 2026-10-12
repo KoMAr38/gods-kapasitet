@@ -1,0 +1,210 @@
+cultureInfo nb-NO
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "table_mål.ssb_godsmengde": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "SSB godsmengde"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Mill. tonn": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "SSB ut": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.kjøretøykm": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Kjøretøykm"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Km": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.tomkjøring_retur_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Tomkjøring retur %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Tom retur": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.ssb_godsmengde_inn": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "SSB godsmengde inn"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "SSB inn": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.etapper_detalj": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Etapper detalj"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Etapper": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.etterregistrerte_etapper": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Etterregistrerte etapper"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Etterregistrert": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.etterregistrert_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Etterregistrert %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Andel": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.kjøretøy_i_drift": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Kjøretøy i drift"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Biler": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_mål.overlastede_etapper": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mål",
+			          "ConceptualProperty": "Overlastede etapper"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Overlast": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

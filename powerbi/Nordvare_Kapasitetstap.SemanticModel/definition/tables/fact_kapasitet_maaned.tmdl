@@ -1,0 +1,139 @@
+/// Kapasitetsregnskapet aggregert til måned × fra-fylke × til-fylke × kjøretøygruppe × lager × varegruppe × etappetype. 56 255 rader. Alle sider unntatt Etapper leser herfra.
+table fact_kapasitet_maaned
+	lineageTag: 4d0164b2-c6c5-452f-bd44-9cf59579d23d
+
+	column maaned_start
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 41bc62b9-bdee-4e90-90b8-103e2d551d6d
+		summarizeBy: none
+		sourceColumn: maaned_start
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fra_fylke_kode
+		dataType: string
+		isHidden
+		lineageTag: 64387a08-e21b-4429-89e7-e6b1b36c5d74
+		summarizeBy: none
+		sourceColumn: fra_fylke_kode
+
+	column til_fylke_kode
+		dataType: string
+		isHidden
+		lineageTag: 5801a9b5-29bb-4ff8-ac4d-3cae1fe3cfb5
+		summarizeBy: none
+		sourceColumn: til_fylke_kode
+
+	column kjoretoygruppe_kode
+		dataType: string
+		isHidden
+		lineageTag: 690c38b3-c7ae-4035-bd64-fb25ffd0fa42
+		summarizeBy: none
+		sourceColumn: kjoretoygruppe_kode
+
+	column lager_id
+		dataType: string
+		isHidden
+		lineageTag: 979e4449-ad10-48be-9a98-1be241c30cc1
+		summarizeBy: none
+		sourceColumn: lager_id
+
+	column varegruppe_kode
+		dataType: string
+		isHidden
+		lineageTag: 3abad8ba-a673-4329-ab3f-efa86169f4ec
+		summarizeBy: none
+		sourceColumn: varegruppe_kode
+
+	/// Utgående (fra lager med varer) eller Retur (tilbake til lager, med eller uten last).
+	column Etappetype
+		dataType: string
+		lineageTag: 53691f69-4411-4010-a2c3-c10ba77a6af1
+		summarizeBy: none
+		sourceColumn: etappetype
+
+	column antall_etapper
+		dataType: int64
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 0ea7e7b7-f6e9-4ae8-83a1-31fa338396bd
+		summarizeBy: none
+		sourceColumn: antall_etapper
+
+	column km
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: b71f212b-7740-4420-9a96-c628c84b3476
+		summarizeBy: none
+		sourceColumn: km
+
+	column km_tom
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 089a63be-68f4-4a32-bad8-c991d6b3fa52
+		summarizeBy: none
+		sourceColumn: km_tom
+
+	column tonn
+		dataType: decimal
+		isHidden
+		formatString: #,0.0
+		isAvailableInMdx: false
+		lineageTag: 5b83e738-41b6-44b8-b5c7-efc24681f85f
+		summarizeBy: none
+		sourceColumn: tonn
+
+	column tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: cb5b110b-8754-46e4-ab57-f703623b7710
+		summarizeBy: none
+		sourceColumn: tonnkm
+
+	column kapasitet_tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 70edd379-5a18-4c7d-a9c3-fa6e940d7fc5
+		summarizeBy: none
+		sourceColumn: kapasitet_tonnkm
+
+	column tapt_tom_tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: dfd2a803-0655-4013-b3ed-704a8375c373
+		summarizeBy: none
+		sourceColumn: tapt_tom_tonnkm
+
+	column tapt_delvis_tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: cad61dad-a0a8-48d2-8b20-c198b656a1c4
+		summarizeBy: none
+		sourceColumn: tapt_delvis_tonnkm
+
+	partition fact_kapasitet_maaned = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("fact_kapasitet_maaned.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"maaned_start", "fra_fylke_kode", "til_fylke_kode", "kjoretoygruppe_kode", "lager_id", "varegruppe_kode", "etappetype", "antall_etapper", "km", "km_tom", "tonn", "tonnkm", "kapasitet_tonnkm", "tapt_tom_tonnkm", "tapt_delvis_tonnkm"}),
+				    // tapt_tonnkm = tom + delvis, regnes i målene
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"maaned_start", type date}, {"antall_etapper", Int64.Type}, {"km", Currency.Type}, {"km_tom", Currency.Type}, {"tonn", Currency.Type}, {"tonnkm", Currency.Type}, {"kapasitet_tonnkm", Currency.Type}, {"tapt_tom_tonnkm", Currency.Type}, {"tapt_delvis_tonnkm", Currency.Type}}, "en-US")
+				in
+				    Typer
+

@@ -1,0 +1,32 @@
+/// Kapasitetsregnskap for den fiktive distributøren Nordvare AS (syntetiske etapper 2023-01 til 2026-06) målt mot SSBs lastebilundersøkelse. Leser dbt-martene i MartMappe.
+model Nordvare_Kapasitetstap
+	culture: nb-NO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["dim_dato","dim_fylke","dim_varegruppe","dim_kjoretoygruppe","dim_lager","_Mål","fact_kapasitet_maaned","fact_etappe","fact_ssb_transportytelser","fact_ssb_transportytelser_aar","fact_ssb_fylkesstrom","MartMappe","RangeStart","RangeEnd","fnLesCsv"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_dato
+ref table dim_fylke
+ref table dim_varegruppe
+ref table dim_kjoretoygruppe
+ref table dim_lager
+ref table _Mål
+ref table fact_kapasitet_maaned
+ref table fact_etappe
+ref table fact_ssb_transportytelser
+ref table fact_ssb_transportytelser_aar
+ref table fact_ssb_fylkesstrom
+ref table Tidsvindu
+ref table 'Vis etter'
+
+ref cultureInfo nb-NO
+

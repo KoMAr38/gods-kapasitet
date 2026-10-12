@@ -1,0 +1,212 @@
+{
+  "2023-01": {
+    "fil": "fact_etappe_2023-01.parquet",
+    "rader": 8202,
+    "sha256": "d39ba0f441e4c4ffc770b4f47e2a1ee1e7927482818babd05c0591e42feea39c"
+  },
+  "2023-02": {
+    "fil": "fact_etappe_2023-02.parquet",
+    "rader": 7792,
+    "sha256": "c9f81df4ba4625a725e113c1a837e72869be0306b0b98b5fb25394762ffc8601"
+  },
+  "2023-03": {
+    "fil": "fact_etappe_2023-03.parquet",
+    "rader": 10564,
+    "sha256": "af4f9d7e6f3e3e177cacc442a88b413d502ed6b93a6bb7248570253f5d169a98"
+  },
+  "2023-04": {
+    "fil": "fact_etappe_2023-04.parquet",
+    "rader": 9814,
+    "sha256": "c534639fc25d49c2a57d51c3df3222b5ed7c0cde1318521ab3f70d4eca096f98"
+  },
+  "2023-05": {
+    "fil": "fact_etappe_2023-05.parquet",
+    "rader": 12340,
+    "sha256": "ee6c315c8586c3516dd7906ba2f415cb2391eb210d560bcb62afbc18e6680834"
+  },
+  "2023-06": {
+    "fil": "fact_etappe_2023-06.parquet",
+    "rader": 13162,
+    "sha256": "962eec38120ecf636f7ba329cdcf8557492845828656266c09d1e902b1f818c6"
+  },
+  "2023-07": {
+    "fil": "fact_etappe_2023-07.parquet",
+    "rader": 10774,
+    "sha256": "bed91c1794e09051232d068ade0c252beb76b65c72a0cee09972ee0666b79b97"
+  },
+  "2023-08": {
+    "fil": "fact_etappe_2023-08.parquet",
+    "rader": 13452,
+    "sha256": "1fc874b25cead6a695a808fdf429f7e6db04b3ffdd94fc05b508d3fa1a16f104"
+  },
+  "2023-09": {
+    "fil": "fact_etappe_2023-09.parquet",
+    "rader": 12716,
+    "sha256": "12dfa70b6b45e644011e84c366d8a97be109b593171b4f07d83bf708eb73981a"
+  },
+  "2023-10": {
+    "fil": "fact_etappe_2023-10.parquet",
+    "rader": 14056,
+    "sha256": "43db2377ec4c78a1f590866f39023b66e9c03a5549333a78000a56e6a2cff80e"
+  },
+  "2023-11": {
+    "fil": "fact_etappe_2023-11.parquet",
+    "rader": 14726,
+    "sha256": "df2811de881f348195caeeab63ef5201135cb9eb0e4f52a7ec0f5e0f94f0cdfd"
+  },
+  "2023-12": {
+    "fil": "fact_etappe_2023-12.parquet",
+    "rader": 15116,
+    "sha256": "91bfe7036cf3d783b355698216e687d98a61ec6350f6c61816904dc679b0e0b7"
+  },
+  "2024-01": {
+    "fil": "fact_etappe_2024-01.parquet",
+    "rader": 13806,
+    "sha256": "2a4046e1376e559c1aac12c92843c0d3dc91e93b75469e7751f15dae08fe96e1"
+  },
+  "2024-02": {
+    "fil": "fact_etappe_2024-02.parquet",
+    "rader": 12798,
+    "sha256": "78aa8c26c253d6bdb8dfa480c3b4a27a0c6e5bb0774270e3e56f302cfbde7e1f"
+  },
+  "2024-03": {
+    "fil": "fact_etappe_2024-03.parquet",
+    "rader": 14520,
+    "sha256": "4808499964524459c78893298353df56694fa659c2a15983528a3ceeac31b7e8"
+  },
+  "2024-04": {
+    "fil": "fact_etappe_2024-04.parquet",
+    "rader": 16548,
+    "sha256": "ad6fa34324605077424e05f5169a11ea15592c063eff2b723cd3034a776f1903"
+  },
+  "2024-05": {
+    "fil": "fact_etappe_2024-05.parquet",
+    "rader": 18152,
+    "sha256": "0554a8fd0427022a9e9d6e5628d357911388a413883b23558ffcf1abd10c58e7"
+  },
+  "2024-06": {
+    "fil": "fact_etappe_2024-06.parquet",
+    "rader": 16996,
+    "sha256": "d69f32a6c9b74617f33ee74adf3c51402a88ba19d331edcc2a82a1d8fd145110"
+  },
+  "2024-07": {
+    "fil": "fact_etappe_2024-07.parquet",
+    "rader": 17010,
+    "sha256": "7fd8627cc1d113be5fbab89e53db0795ea269757de332ee7d3a55582a000fa58"
+  },
+  "2024-08": {
+    "fil": "fact_etappe_2024-08.parquet",
+    "rader": 18378,
+    "sha256": "8c38550f009472e4aae95f77ae9abfdcf853310495d8e84b87cb1cba238e8bd0"
+  },
+  "2024-09": {
+    "fil": "fact_etappe_2024-09.parquet",
+    "rader": 18758,
+    "sha256": "d0c0bfb0e921452f0c59ab5f6e0400aa501d7e82f58daafce50230509b221624"
+  },
+  "2024-10": {
+    "fil": "fact_etappe_2024-10.parquet",
+    "rader": 20760,
+    "sha256": "8a6774d9db12e99c83f118974989235c11cbc8ad87076c3679d3a711d69049b7"
+  },
+  "2024-11": {
+    "fil": "fact_etappe_2024-11.parquet",
+    "rader": 18802,
+    "sha256": "4f701ace16289879f914c10fbf37ff1f92c96d32c5be4dcc3e668544c1d6fb6a"
+  },
+  "2024-12": {
+    "fil": "fact_etappe_2024-12.parquet",
+    "rader": 21666,
+    "sha256": "7ff4b479faac05f848fe2ec4f547206b285be8badea6904f3d1f0cd882b713da"
+  },
+  "2025-01": {
+    "fil": "fact_etappe_2025-01.parquet",
+    "rader": 17888,
+    "sha256": "1f699d607967683d0c9c8def3ee567742929fe61b0953e5c6c5948e10ce09d92"
+  },
+  "2025-02": {
+    "fil": "fact_etappe_2025-02.parquet",
+    "rader": 15324,
+    "sha256": "f570b5fb868ab1293333c9e47fee6772f090cbba2d21255cc0f45d0bee063b32"
+  },
+  "2025-03": {
+    "fil": "fact_etappe_2025-03.parquet",
+    "rader": 17864,
+    "sha256": "959ee136ca60372b838405541146934dcaef0822a5cd8b8d2d2ae77eb3fd7def"
+  },
+  "2025-04": {
+    "fil": "fact_etappe_2025-04.parquet",
+    "rader": 19616,
+    "sha256": "04dabb9f37c52eea7ba64d9042b74d12d5ffb7e19dce5415f060990f2c8c72a0"
+  },
+  "2025-05": {
+    "fil": "fact_etappe_2025-05.parquet",
+    "rader": 19804,
+    "sha256": "bdeebeaebd23177126eca5b9e104063388d0c5d0bc4fca35ab8921611b2a76d7"
+  },
+  "2025-06": {
+    "fil": "fact_etappe_2025-06.parquet",
+    "rader": 20126,
+    "sha256": "1d9f9b74564d320d311e67523a92a677ac9454c1e4e4d29f5362533c6bfb7c7b"
+  },
+  "2025-07": {
+    "fil": "fact_etappe_2025-07.parquet",
+    "rader": 17960,
+    "sha256": "003bb16c071d7b5b3e64693bc7ebe60b951462067e30d8588e73bcabc019f1e8"
+  },
+  "2025-08": {
+    "fil": "fact_etappe_2025-08.parquet",
+    "rader": 18522,
+    "sha256": "a93b14e2759211d0d2ee11b2b4c81db18fda2b740032857c23df9db53ac5f9e8"
+  },
+  "2025-09": {
+    "fil": "fact_etappe_2025-09.parquet",
+    "rader": 19618,
+    "sha256": "d5378d39038c98ca8c28a1705408d311544d58421866464941eed2ffd543f3df"
+  },
+  "2025-10": {
+    "fil": "fact_etappe_2025-10.parquet",
+    "rader": 20938,
+    "sha256": "b30c5061f25bcd58a9da975fe49c37a85a44d6bf9bf6aa68c6de2d2ad8e3aa92"
+  },
+  "2025-11": {
+    "fil": "fact_etappe_2025-11.parquet",
+    "rader": 17948,
+    "sha256": "56e9d955f4075ef8b02a4d7009ba615360cc30dc22fd431da22419653dd1e11f"
+  },
+  "2025-12": {
+    "fil": "fact_etappe_2025-12.parquet",
+    "rader": 22412,
+    "sha256": "d3cf7cb4d8b2053457d6ed905a7520a96b9bc6eab2056f717db7ce2771a912f8"
+  },
+  "2026-01": {
+    "fil": "fact_etappe_2026-01.parquet",
+    "rader": 17054,
+    "sha256": "5d27665d4595b805838acfd0110357a5f8e5dbdb6a397fc1f5e4d0e43a2170f3"
+  },
+  "2026-02": {
+    "fil": "fact_etappe_2026-02.parquet",
+    "rader": 15580,
+    "sha256": "4668f25ea6b054e1b75b3523add77d94c8273b1a518382c5107b3b17a056705c"
+  },
+  "2026-03": {
+    "fil": "fact_etappe_2026-03.parquet",
+    "rader": 18864,
+    "sha256": "741073038911846f238a25096e468a226c5f2d59c69ebb0779512d45431f4adf"
+  },
+  "2026-04": {
+    "fil": "fact_etappe_2026-04.parquet",
+    "rader": 19408,
+    "sha256": "971377f9cc108e0dcd043ca8571f35f440e53073b9e25d079e4ce757608d8178"
+  },
+  "2026-05": {
+    "fil": "fact_etappe_2026-05.parquet",
+    "rader": 19106,
+    "sha256": "7918976fb0b221996ecd7a85937ad776679635e55e4c5ca6a33fdd429d04bb76"
+  },
+  "2026-06": {
+    "fil": "fact_etappe_2026-06.parquet",
+    "rader": 18726,
+    "sha256": "213066ffb2a24c7eb9cc8a56f0b4f2ea2b2c430cac74d77c9cee3996bae8d6b2"
+  }
+}

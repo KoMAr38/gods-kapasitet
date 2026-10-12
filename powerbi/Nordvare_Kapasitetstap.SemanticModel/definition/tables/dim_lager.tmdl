@@ -1,0 +1,37 @@
+/// Nordvares seks lagre, fra Vestby til Tromsø.
+table dim_lager
+	lineageTag: 4b016217-31a4-4b63-977e-e47913cc921e
+
+	/// L1 til L6, sør til nord.
+	column lager_id
+		dataType: string
+		isHidden
+		lineageTag: 7dfe9fca-6ec1-4ea0-a0c6-75e3424c0538
+		summarizeBy: none
+		sourceColumn: lager_id
+
+	/// Lageret bilen hører til.
+	column Lager
+		dataType: string
+		lineageTag: e186cd74-3e4a-4256-8372-85fd6870c493
+		summarizeBy: none
+		sourceColumn: lager_navn
+		sortByColumn: lager_id
+
+	/// Fylket lageret ligger i.
+	column Lagerfylke
+		dataType: string
+		lineageTag: eda2ed1c-dea8-4ade-83d1-73e2388aae43
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: fylke_navn
+
+	partition dim_lager = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("dim_lager.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"lager_id", "lager_navn", "fylke_navn"})
+				in
+				    Kolonner
+

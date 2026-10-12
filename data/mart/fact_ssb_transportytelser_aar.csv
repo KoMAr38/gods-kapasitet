@@ -1,0 +1,121 @@
+transporttype_kode,transporttype,aar,aar_start,kjoretoykm_mill,kjoretoykm_med_last_mill,transportmengde_mill_tonn,transportarbeid_mill_tonnkm,tomkjoring_pst,gj_transportlengde_km
+01,Nasjonal leie- og egentransport,1996,1996-01-01,1211.3,859.7,206.1,9718.6,29.0,47.2
+01,Nasjonal leie- og egentransport,1997,1997-01-01,1385.2,987.4,217.7,10903.3,28.7,50.1
+01,Nasjonal leie- og egentransport,1998,1998-01-01,1357.9,984.3,221.3,11752.8,27.5,53.1
+01,Nasjonal leie- og egentransport,2000,2000-01-01,1359.6,991.6,218.4,12133.1,27.1,55.5
+01,Nasjonal leie- og egentransport,2002,2002-01-01,1329.3,982.6,211.7,12718.9,26.1,60.1
+01,Nasjonal leie- og egentransport,2003,2003-01-01,1471.7,1084.1,226.8,13618.2,26.3,60.0
+01,Nasjonal leie- og egentransport,2004,2004-01-01,1586.2,1160.5,240.4,14458.2,26.8,60.1
+01,Nasjonal leie- og egentransport,2007,2007-01-01,1647.6,1203.2,263.9,15674.9,27.0,59.4
+01,Nasjonal leie- og egentransport,2009,2009-01-01,1668.2,1213.0,252.0,15272.8,27.3,60.6
+01,Nasjonal leie- og egentransport,2010,2010-01-01,1756.0,1304.0,260.9,16339.9,25.7,62.6
+01,Nasjonal leie- og egentransport,2011,2011-01-01,1745.5,1297.5,251.0,16128.4,25.7,64.3
+01,Nasjonal leie- og egentransport,2012,2012-01-01,1873.8,1379.7,246.2,16979.3,26.4,69.0
+01,Nasjonal leie- og egentransport,2013,2013-01-01,1958.6,1465.3,265.7,18337.0,25.2,69.0
+01,Nasjonal leie- og egentransport,2016,2016-01-01,1843.6,1325.3,264.0,18515.4,28.1,70.1
+01,Nasjonal leie- og egentransport,2017,2017-01-01,1854.2,1319.7,250.7,18730.8,28.8,74.7
+01,Nasjonal leie- og egentransport,2018,2018-01-01,1819.5,1271.2,249.7,18865.8,30.0,75.6
+01,Nasjonal leie- og egentransport,2024,2024-01-01,2149.2,1553.4,254.9,22332.7,27.7,87.6
+02,Nasjonal leietransport,2003,2003-01-01,1017.8,761.2,138.2,10764.6,25.2,77.9
+02,Nasjonal leietransport,2005,2005-01-01,1132.2,851.7,165.0,12434.9,24.8,75.4
+02,Nasjonal leietransport,2008,2008-01-01,1148.4,851.8,165.0,12320.0,25.8,74.7
+02,Nasjonal leietransport,2011,2011-01-01,1145.2,868.8,135.0,12206.6,24.1,90.4
+02,Nasjonal leietransport,2013,2013-01-01,1346.0,1021.5,174.2,14366.2,24.1,82.4
+02,Nasjonal leietransport,2017,2017-01-01,1341.6,967.7,170.5,14919.5,27.9,87.5
+02,Nasjonal leietransport,2021,2021-01-01,1496.3,1073.6,178.5,17197.4,28.3,96.3
+02,Nasjonal leietransport,2022,2022-01-01,1669.6,1194.7,188.5,18861.9,28.4,100.1
+02,Nasjonal leietransport,2024,2024-01-01,1681.2,1229.3,192.6,18865.6,26.9,97.9
+04,Nasjonal egentransport,1996,1996-01-01,400.8,286.0,69.9,2017.6,28.6,28.7
+04,Nasjonal egentransport,2000,2000-01-01,337.7,233.0,63.8,1851.5,31.0,29.0
+04,Nasjonal egentransport,2001,2001-01-01,328.8,234.6,62.6,1977.9,28.7,31.6
+04,Nasjonal egentransport,2006,2006-01-01,461.2,316.6,93.3,2922.6,31.4,31.3
+04,Nasjonal egentransport,2007,2007-01-01,522.0,371.6,101.9,3540.5,28.8,34.7
+04,Nasjonal egentransport,2008,2008-01-01,632.1,458.3,117.8,4408.1,27.5,37.4
+04,Nasjonal egentransport,2010,2010-01-01,600.2,427.7,119.8,4009.7,28.7,33.5
+04,Nasjonal egentransport,2011,2011-01-01,600.3,428.8,116.0,3921.9,28.6,33.8
+04,Nasjonal egentransport,2012,2012-01-01,583.1,420.8,92.0,3644.0,27.8,39.6
+04,Nasjonal egentransport,2014,2014-01-01,652.3,458.8,124.3,4748.1,29.7,38.2
+04,Nasjonal egentransport,2016,2016-01-01,458.4,317.5,86.5,3430.5,30.7,39.6
+04,Nasjonal egentransport,2017,2017-01-01,512.6,352.0,80.2,3811.3,31.3,47.5
+04,Nasjonal egentransport,2018,2018-01-01,451.7,313.2,77.5,3819.4,30.7,49.3
+04,Nasjonal egentransport,2021,2021-01-01,465.0,317.6,82.6,3198.3,31.7,38.7
+04,Nasjonal egentransport,2023,2023-01-01,407.8,291.2,77.5,3675.5,28.6,47.4
+04,Nasjonal egentransport,2025,2025-01-01,405.4,272.9,56.4,2926.8,32.7,51.9
+03,Internasjonal leie- og egentransport,1996,1996-01-01,170.3,,3.8,2748.6,,
+03,Internasjonal leie- og egentransport,1997,1997-01-01,184.0,,4.0,3161.2,,
+03,Internasjonal leie- og egentransport,2000,2000-01-01,187.7,165.4,3.8,3019.2,11.9,789.5
+03,Internasjonal leie- og egentransport,2001,2001-01-01,172.9,152.2,3.7,2789.2,12.0,747.2
+03,Internasjonal leie- og egentransport,2003,2003-01-01,193.8,164.3,4.6,3068.3,15.2,674.2
+03,Internasjonal leie- og egentransport,2004,2004-01-01,189.6,165.4,4.1,3006.4,12.8,740.0
+03,Internasjonal leie- og egentransport,2009,2009-01-01,195.9,159.8,5.5,3169.8,18.4,571.3
+03,Internasjonal leie- og egentransport,2010,2010-01-01,201.6,167.3,5.9,3406.5,17.0,579.6
+03,Internasjonal leie- og egentransport,2012,2012-01-01,210.2,177.0,5.3,3186.9,15.8,600.0
+03,Internasjonal leie- og egentransport,2014,2014-01-01,174.5,134.2,5.0,2432.1,23.1,485.7
+03,Internasjonal leie- og egentransport,2016,2016-01-01,152.2,118.1,4.9,2435.4,22.4,499.2
+03,Internasjonal leie- og egentransport,2017,2017-01-01,171.9,135.6,5.0,2655.3,21.1,533.5
+03,Internasjonal leie- og egentransport,2018,2018-01-01,154.5,114.0,5.4,2481.0,26.2,456.1
+03,Internasjonal leie- og egentransport,2020,2020-01-01,129.9,103.9,4.8,2178.7,20.0,455.5
+03,Internasjonal leie- og egentransport,2024,2024-01-01,130.8,86.5,4.5,1721.3,33.8,380.9
+03,Internasjonal leie- og egentransport,2025,2025-01-01,113.3,83.8,4.5,1519.7,26.1,337.4
+01,Nasjonal leie- og egentransport,1999,1999-01-01,1364.7,994.3,225.0,11856.4,27.1,52.7
+01,Nasjonal leie- og egentransport,2001,2001-01-01,1328.1,981.9,215.9,12394.0,26.1,57.4
+01,Nasjonal leie- og egentransport,2005,2005-01-01,1607.4,1192.1,240.7,15348.3,25.8,63.8
+01,Nasjonal leie- og egentransport,2006,2006-01-01,1609.8,1181.8,245.2,15316.0,26.6,62.5
+01,Nasjonal leie- og egentransport,2008,2008-01-01,1780.4,1310.2,282.8,16728.1,26.4,59.2
+01,Nasjonal leie- og egentransport,2014,2014-01-01,2005.0,1469.3,288.6,19102.9,26.7,66.2
+01,Nasjonal leie- og egentransport,2015,2015-01-01,1992.8,1501.5,265.8,18570.0,24.7,69.9
+01,Nasjonal leie- og egentransport,2019,2019-01-01,1837.3,1321.9,239.4,19389.4,28.1,81.0
+01,Nasjonal leie- og egentransport,2020,2020-01-01,1909.4,1343.4,238.8,19228.0,29.6,80.5
+01,Nasjonal leie- og egentransport,2021,2021-01-01,1961.3,1391.2,261.1,20395.7,29.1,78.1
+01,Nasjonal leie- og egentransport,2022,2022-01-01,2138.7,1513.3,261.9,22281.3,29.2,85.1
+01,Nasjonal leie- og egentransport,2023,2023-01-01,2178.3,1552.5,261.9,22617.0,28.7,86.4
+01,Nasjonal leie- og egentransport,2025,2025-01-01,2051.0,1478.2,252.4,22008.1,27.9,87.2
+02,Nasjonal leietransport,1996,1996-01-01,810.5,573.7,136.2,7701.0,29.2,56.6
+02,Nasjonal leietransport,1997,1997-01-01,921.9,662.8,142.2,8615.3,28.1,60.6
+02,Nasjonal leietransport,1998,1998-01-01,959.9,700.7,143.5,9558.6,27.0,66.6
+02,Nasjonal leietransport,1999,1999-01-01,1070.8,788.7,174.9,10445.1,26.3,59.7
+02,Nasjonal leietransport,2000,2000-01-01,1021.9,758.6,154.6,10281.6,25.8,66.5
+02,Nasjonal leietransport,2001,2001-01-01,999.3,747.3,153.3,10416.1,25.2,67.9
+02,Nasjonal leietransport,2002,2002-01-01,1006.9,760.9,147.9,10865.4,24.4,73.5
+02,Nasjonal leietransport,2004,2004-01-01,1074.5,816.0,133.1,11306.8,24.1,85.0
+02,Nasjonal leietransport,2006,2006-01-01,1148.7,865.2,152.0,12393.4,24.7,81.5
+02,Nasjonal leietransport,2007,2007-01-01,1125.6,831.6,162.0,12134.3,26.1,74.9
+02,Nasjonal leietransport,2009,2009-01-01,1131.4,844.9,142.5,11975.6,25.3,84.0
+02,Nasjonal leietransport,2010,2010-01-01,1155.8,876.3,141.1,12330.3,24.2,87.4
+02,Nasjonal leietransport,2012,2012-01-01,1290.6,959.0,154.1,13335.4,25.7,86.5
+02,Nasjonal leietransport,2014,2014-01-01,1352.8,1010.5,164.3,14354.8,25.3,87.4
+02,Nasjonal leietransport,2015,2015-01-01,1394.7,1080.8,161.0,14429.2,22.5,89.6
+02,Nasjonal leietransport,2016,2016-01-01,1385.2,1007.8,177.5,15084.9,27.2,85.0
+02,Nasjonal leietransport,2018,2018-01-01,1367.8,958.0,172.2,15046.4,30.0,87.4
+02,Nasjonal leietransport,2019,2019-01-01,1370.6,989.4,161.8,15600.2,27.8,96.4
+02,Nasjonal leietransport,2020,2020-01-01,1445.2,1020.3,166.6,15836.2,29.4,95.1
+02,Nasjonal leietransport,2023,2023-01-01,1770.6,1261.3,184.4,18941.5,28.8,102.7
+02,Nasjonal leietransport,2025,2025-01-01,1645.6,1205.3,196.0,19081.3,26.8,97.4
+04,Nasjonal egentransport,1997,1997-01-01,463.3,324.6,75.5,2288.0,29.9,30.3
+04,Nasjonal egentransport,1998,1998-01-01,398.0,283.6,77.8,2194.2,28.7,28.2
+04,Nasjonal egentransport,1999,1999-01-01,293.9,205.6,50.1,1411.3,30.0,28.2
+04,Nasjonal egentransport,2002,2002-01-01,322.4,221.7,63.8,1853.5,31.2,29.1
+04,Nasjonal egentransport,2003,2003-01-01,453.9,322.9,88.7,2853.6,28.9,32.2
+04,Nasjonal egentransport,2004,2004-01-01,511.7,344.5,107.4,3151.4,32.7,29.3
+04,Nasjonal egentransport,2005,2005-01-01,475.3,340.4,75.7,2913.3,28.4,38.5
+04,Nasjonal egentransport,2009,2009-01-01,536.8,368.0,109.5,3297.2,31.4,30.1
+04,Nasjonal egentransport,2013,2013-01-01,612.6,443.8,91.4,3970.9,27.5,43.4
+04,Nasjonal egentransport,2015,2015-01-01,598.1,420.7,104.9,4140.8,29.7,39.5
+04,Nasjonal egentransport,2019,2019-01-01,466.7,332.5,77.6,3789.2,28.8,48.8
+04,Nasjonal egentransport,2020,2020-01-01,464.2,323.2,72.2,3391.8,30.4,47.0
+04,Nasjonal egentransport,2022,2022-01-01,469.1,318.6,73.4,3419.4,32.1,46.6
+04,Nasjonal egentransport,2024,2024-01-01,468.1,324.1,62.2,3467.1,30.7,55.7
+03,Internasjonal leie- og egentransport,1998,1998-01-01,184.9,,3.9,3002.6,,
+03,Internasjonal leie- og egentransport,1999,1999-01-01,201.1,177.1,4.0,3174.0,11.9,799.2
+03,Internasjonal leie- og egentransport,2002,2002-01-01,170.9,147.5,3.8,2705.8,13.7,711.8
+03,Internasjonal leie- og egentransport,2005,2005-01-01,176.1,149.8,4.0,2894.9,15.0,722.7
+03,Internasjonal leie- og egentransport,2006,2006-01-01,227.6,195.3,6.1,4076.5,14.2,668.8
+03,Internasjonal leie- og egentransport,2007,2007-01-01,239.6,197.3,6.6,3956.0,17.7,596.0
+03,Internasjonal leie- og egentransport,2008,2008-01-01,235.7,193.3,6.6,3971.9,18.0,601.3
+03,Internasjonal leie- og egentransport,2011,2011-01-01,194.9,157.8,5.3,3056.5,19.0,567.3
+03,Internasjonal leie- og egentransport,2013,2013-01-01,214.0,172.0,5.6,2965.6,19.6,528.7
+03,Internasjonal leie- og egentransport,2015,2015-01-01,171.2,136.0,4.7,2665.3,20.6,567.0
+03,Internasjonal leie- og egentransport,2019,2019-01-01,128.8,96.3,5.0,2076.6,25.3,414.0
+03,Internasjonal leie- og egentransport,2021,2021-01-01,138.7,104.1,5.3,2161.7,25.0,407.8
+03,Internasjonal leie- og egentransport,2022,2022-01-01,144.8,108.0,4.9,2147.2,25.4,435.1
+03,Internasjonal leie- og egentransport,2023,2023-01-01,133.0,95.3,4.5,1811.5,28.3,400.9

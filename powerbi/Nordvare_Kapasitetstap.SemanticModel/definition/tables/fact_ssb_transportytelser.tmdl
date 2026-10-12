@@ -1,0 +1,68 @@
+/// SSB 03650: lastebiltransport per kvartal 2003K1 til 2026K1, fire transporttyper. Referanse for tomkjøring. Koblet til dim_dato på kvartalsstart.
+table fact_ssb_transportytelser
+	lineageTag: f0bc40cd-2c4d-4b59-a662-f0a4db3c705f
+
+	/// 01 nasjonal leie- og egentransport, 02 leietransport, 03 internasjonal, 04 egentransport.
+	column transporttype_kode
+		dataType: string
+		isHidden
+		lineageTag: 4ae98973-b95d-4595-a405-e9575d1a5a4e
+		summarizeBy: none
+		sourceColumn: transporttype_kode
+
+	column kvartal_start
+		dataType: dateTime
+		isHidden
+		formatString: dd.mm.yyyy
+		lineageTag: 1302f83d-7572-4f99-bfc3-966529054c00
+		summarizeBy: none
+		sourceColumn: kvartal_start
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column kjoretoykm_mill
+		dataType: decimal
+		isHidden
+		formatString: #,0.0
+		isAvailableInMdx: false
+		lineageTag: 5119332c-4cb0-4ac3-b686-3bbaabe34b29
+		summarizeBy: none
+		sourceColumn: kjoretoykm_mill
+
+	column kjoretoykm_med_last_mill
+		dataType: decimal
+		isHidden
+		formatString: #,0.0
+		isAvailableInMdx: false
+		lineageTag: a736dcb3-4153-49f2-9154-e6b478fea576
+		summarizeBy: none
+		sourceColumn: kjoretoykm_med_last_mill
+
+	column transportmengde_mill_tonn
+		dataType: decimal
+		isHidden
+		formatString: #,0.0
+		isAvailableInMdx: false
+		lineageTag: 71bea7fe-f7cb-4ae6-bbf9-76688f6ac23d
+		summarizeBy: none
+		sourceColumn: transportmengde_mill_tonn
+
+	column transportarbeid_mill_tonnkm
+		dataType: decimal
+		isHidden
+		formatString: #,0
+		isAvailableInMdx: false
+		lineageTag: 237a434c-6fc9-4c67-9537-60be7f14a396
+		summarizeBy: none
+		sourceColumn: transportarbeid_mill_tonnkm
+
+	partition fact_ssb_transportytelser = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("fact_ssb_transportytelser.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"transporttype_kode", "kvartal_start", "kjoretoykm_mill", "kjoretoykm_med_last_mill", "transportmengde_mill_tonn", "transportarbeid_mill_tonnkm"}),
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"kvartal_start", type date}, {"kjoretoykm_mill", Currency.Type}, {"kjoretoykm_med_last_mill", Currency.Type}, {"transportmengde_mill_tonn", Currency.Type}, {"transportarbeid_mill_tonnkm", Currency.Type}}, "en-US")
+				in
+				    Typer
+

@@ -1,0 +1,4 @@
+kjoretoygruppe_kode,kjoretoygruppe_navn,nyttelast_tonn,totalvekt_tonn,typisk_bruk,sortering
+DIST,Distribusjonsbil,9,18,Lokal distribusjon til butikk,1
+SEMI,Semitrailer,25,44,Regional og nasjonal linjetrafikk,2
+MODUL,Modulvogntog,38,60,Lange transporter mellom lager,3

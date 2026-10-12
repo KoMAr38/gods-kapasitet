@@ -1,0 +1,7 @@
+gods_kapasitet:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: data/gods_kapasitet.duckdb
+      threads: 4

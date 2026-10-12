@@ -1,0 +1,134 @@
+/// Én rad per dag 1996-01-01 til 2026-12-31. Felles datotabell for alle faktatabellene: Nordvare kobles på dato og månedsstart, SSB på kvartals- og årsstart. Merket som datotabell, så tidsforskyvning i Tidsvindu fjerner andre datofiltre av seg selv.
+table dim_dato
+	lineageTag: 96772432-ae6f-4ac6-ae8c-6e8722ad4fd1
+	dataCategory: Time
+
+	/// Kalenderdato. Nøkkel mot alle faktatabellene.
+	column Dato
+		dataType: dateTime
+		isUnique
+		isKey
+		formatString: dd.mm.yyyy
+		lineageTag: 3831fbfc-1068-446f-b7ff-e91531105b65
+		summarizeBy: none
+		sourceColumn: dato
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Kalenderår.
+	column År
+		dataType: int64
+		formatString: 0
+		lineageTag: be098ffc-b3f6-411b-bd9e-81cf6d68767f
+		summarizeBy: none
+		sourceColumn: aar
+
+	/// K1 til K4, uten år. For sesongvisning der årene legges over hverandre.
+	column Kvartal
+		dataType: string
+		lineageTag: 2a1b6929-72b8-4d4f-b798-8a699aad234b
+		summarizeBy: none
+		sourceColumn: kvartal_kort
+		sortByColumn: 'Kvartal nr'
+
+	column 'Kvartal nr'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f523282c-73ce-4874-ac4c-7b612fe67f7c
+		summarizeBy: none
+		sourceColumn: kvartal
+
+	/// Kvartal slik SSB skriver det, for eksempel 2025K1.
+	column 'Kvartal og år'
+		dataType: string
+		lineageTag: 2fb404ec-6f27-4fe5-8a23-ce5e78f2df3a
+		summarizeBy: none
+		sourceColumn: kvartal_label
+		sortByColumn: 'Kvartal id'
+
+	/// yyyyk, for eksempel 20251. Brukes når SSB-mål utvider et utvalg til hele kvartaler.
+	column 'Kvartal id'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a9d139a0-5d73-45a3-ac17-279be532c243
+		summarizeBy: none
+		sourceColumn: kvartal_id
+
+	/// jan til des, uten år. For sesongvisning.
+	column Måned
+		dataType: string
+		lineageTag: 1e410289-d7c3-4797-a0b5-1f960469dc95
+		summarizeBy: none
+		sourceColumn: maaned_kort
+		sortByColumn: 'Måned nr'
+
+	column 'Måned nr'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3d7ef06e-09d6-4e9e-b3ac-380e38f99a7e
+		summarizeBy: none
+		sourceColumn: maaned
+
+	/// Første dag i måneden. Kontinuerlig tidsakse for månedsserier.
+	column Månedsstart
+		dataType: dateTime
+		formatString: mmm yyyy
+		lineageTag: b5eed72e-24a0-4751-943f-f9606fb523d3
+		summarizeBy: none
+		sourceColumn: maaned_start
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	/// Måned og år som tekst, for eksempel jan 25.
+	column 'Måned og år'
+		dataType: string
+		lineageTag: cfea8a0a-21e6-4129-b436-4cb3bc71ff0e
+		summarizeBy: none
+		sourceColumn: maaned_aar
+		sortByColumn: 'Måned id'
+
+	column 'Måned id'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9431b665-7b4f-41ec-90e1-d958874bc35e
+		summarizeBy: none
+		sourceColumn: maaned_id
+
+	/// man til søn.
+	column Ukedag
+		dataType: string
+		lineageTag: 69c57400-c9bb-4ad0-97e5-b8f3ef000d90
+		summarizeBy: none
+		sourceColumn: ukedag
+		sortByColumn: 'Ukedag nr'
+
+	column 'Ukedag nr'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 83794da2-fb32-47e4-a54a-feff932fe3ff
+		summarizeBy: none
+		sourceColumn: ukedag_nr
+
+	/// Sann for hele måneder som finnes i Nordvare-dataene (jan 2023 til jun 2026). Tidsvindu sammenligner bare slike måneder.
+	column 'Har data'
+		dataType: boolean
+		isHidden
+		lineageTag: d048be67-e251-4b1b-a3ec-5e47601ea33c
+		summarizeBy: none
+		sourceColumn: har_data
+
+	partition dim_dato = m
+		mode: import
+		source =
+				let
+				    Kilde = fnLesCsv("dim_dato.csv"),
+				    Kolonner = Table.SelectColumns(Kilde, {"dato", "aar", "kvartal", "kvartal_kort", "kvartal_label", "kvartal_id", "maaned", "maaned_id", "maaned_start", "maaned_kort", "maaned_aar", "ukedag_nr", "ukedag", "har_data"}),
+				    Typer = Table.TransformColumnTypes(Kolonner, {{"dato", type date}, {"aar", Int64.Type}, {"kvartal", Int64.Type}, {"kvartal_id", Int64.Type}, {"maaned", Int64.Type}, {"maaned_id", Int64.Type}, {"maaned_start", type date}, {"ukedag_nr", Int64.Type}, {"har_data", type logical}}, "en-US")
+				in
+				    Typer
+

@@ -1,0 +1,7 @@
+varegruppe_kode,varegruppe_navn,nst_kode,nst_navn,volumbegrenset,typisk_utnyttelse
+TORR,Tørrvarer,04,Nærings- og nytelsesmidler,1,0.62
+KJOL,Kjølevarer,04,Nærings- og nytelsesmidler,1,0.55
+FRYS,Frysevarer,04,Nærings- og nytelsesmidler,1,0.50
+DRIKKE,Drikkevarer,04,Nærings- og nytelsesmidler,0,0.86
+NONFOOD,Non-food og samlastet,18,Samlastet gods,1,0.45
+RETUR,Returemballasje og tomgods,17,Andre ikke-markedsrettede varer,1,0.15

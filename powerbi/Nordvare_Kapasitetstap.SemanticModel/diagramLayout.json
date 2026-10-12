@@ -1,0 +1,191 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1589.1975029313141,
+            "y": 452.05073915491755
+          },
+          "nodeIndex": "_Mål",
+          "nodeLineageTag": "fcd1f5af-cb57-4c8c-964b-6644c66a7d8b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1068.1434525116902,
+            "y": 527.79154666954685
+          },
+          "nodeIndex": "dim_dato",
+          "nodeLineageTag": "96772432-ae6f-4ac6-ae8c-6e8722ad4fd1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 781.09297968777366,
+            "y": 779.77602619148979
+          },
+          "nodeIndex": "dim_fylke",
+          "nodeLineageTag": "db0d88bc-3477-4282-9b63-ed2ece09b2a0",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 335.58572780805889,
+            "y": 728.6681801516138
+          },
+          "nodeIndex": "dim_kjoretoygruppe",
+          "nodeLineageTag": "428477a7-e314-4ad2-8dac-f96cd629f6cd",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 906.42729658724443,
+            "y": 302.40091259661529
+          },
+          "nodeIndex": "dim_lager",
+          "nodeLineageTag": "4b016217-31a4-4b63-977e-e47913cc921e",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 730.83218213339626
+          },
+          "nodeIndex": "dim_varegruppe",
+          "nodeLineageTag": "8f40caed-f479-4e80-aef6-35c8239d76de",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 825.19024136213966,
+            "y": -50
+          },
+          "nodeIndex": "fact_etappe",
+          "nodeLineageTag": "33988e73-31fb-41dc-8661-cd3f4cbdb494",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 620.84185139479678,
+            "y": 426.49851136407307
+          },
+          "nodeIndex": "fact_kapasitet_maaned",
+          "nodeLineageTag": "4d0164b2-c6c5-452f-bd44-9cf59579d23d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1067.4189164573634,
+            "y": 906.10147830983522
+          },
+          "nodeIndex": "fact_ssb_fylkesstrom",
+          "nodeLineageTag": "f979581d-a006-4910-92cb-3381873c15a6",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1354.4704190447324,
+            "y": 792.75304341789388
+          },
+          "nodeIndex": "fact_ssb_transportytelser",
+          "nodeLineageTag": "f0bc40cd-2c4d-4b59-a662-f0a4db3c705f",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1355.1975029313139,
+            "y": 311.18047137254825
+          },
+          "nodeIndex": "fact_ssb_transportytelser_aar",
+          "nodeLineageTag": "257611f8-390c-443d-9769-b07d32b50e03",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1873.1975029313141,
+            "y": 538.05073915491755
+          },
+          "nodeIndex": "Tidsvindu",
+          "nodeLineageTag": "95516d7c-0dd1-4fad-a7ab-1b6dd4fdfcec",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2157.1975029313144,
+            "y": 526.05073915491755
+          },
+          "nodeIndex": "Vis etter",
+          "nodeLineageTag": "1fbab62f-9e23-447a-91ed-0647cd8d88aa",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,40 @@
+{
+  "uttrekkstidspunkt": "2026-09-02T12:57:18.977780+00:00",
+  "tabeller": {
+    "03650": {
+      "fil": "transportytelser_kvartal.csv",
+      "tittel": "03650: Nasjonal og internasjonal leie- og egentransport. Transportytelser, etter type transport, statistikkvariabel og kvartal",
+      "rader": 2232,
+      "sist_oppdatert_ssb": "2026-07-24T06:00:00Z",
+      "sha256": "53d21fecd23d6200a0ac518da8bf8ffc35341fd15838826810c21e7f5d0ac57e"
+    },
+    "08478": {
+      "fil": "transportytelser_aar.csv",
+      "tittel": "08478: Nasjonal og internasjonal leie- og egentransport, etter type transport, statistikkvariabel og år",
+      "rader": 720,
+      "sist_oppdatert_ssb": "2026-04-24T06:00:00Z",
+      "sha256": "677c3722db6ab76bb619b79d85c2a393171ab8a0595eb8bcca22cbfa5152383b"
+    },
+    "09830": {
+      "fil": "fylkesmatrise_aar.csv",
+      "tittel": "09830: Nasjonal leie- og egentransport. Transportytelser, etter region for pålessing, region for avlessing, statistikkvariabel og år",
+      "rader": 56350,
+      "sist_oppdatert_ssb": "2026-04-24T06:00:00Z",
+      "sha256": "29035466520d1bf38692d1aba5d5b6d524072be92c6d2c5b27fe14c69878166a"
+    },
+    "06988": {
+      "fil": "vareslag_kvartal.csv",
+      "tittel": "06988: Nasjonale transportytelser etter vareslag, etter vareslag, statistikkvariabel og kvartal",
+      "rader": 730,
+      "sist_oppdatert_ssb": "2026-07-24T06:00:00Z",
+      "sha256": "f2823b78dc53347c283f84a8e32165f53199acd2e9565c1a0910e65c4d2aad19"
+    },
+    "13321": {
+      "fil": "avstand_vareslag_aar.csv",
+      "tittel": "13321: Godstransport med norske lastebiler, etter avstandsklasse, vareslag, statistikkvariabel og år",
+      "rader": 9072,
+      "sist_oppdatert_ssb": "2026-04-24T06:00:00Z",
+      "sha256": "d5a84620044cf89f8942bd3a540a6aa85b04cc10442ed6429d3d40be29c74d85"
+    }
+  }
+}

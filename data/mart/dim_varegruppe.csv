@@ -1,0 +1,8 @@
+varegruppe_kode,varegruppe_navn,nst_kode,nst_navn,er_volumbegrenset,begrensning,typisk_utnyttelse,sortering
+DRIKKE,Drikkevarer,04,Nærings- og nytelsesmidler,false,Vekt,0.86,1
+TORR,Tørrvarer,04,Nærings- og nytelsesmidler,true,Volum,0.62,2
+KJOL,Kjølevarer,04,Nærings- og nytelsesmidler,true,Volum,0.55,3
+FRYS,Frysevarer,04,Nærings- og nytelsesmidler,true,Volum,0.5,4
+NONFOOD,Non-food og samlastet,18,Samlastet gods,true,Volum,0.45,5
+RETUR,Returemballasje og tomgods,17,Andre ikke-markedsrettede varer,true,Volum,0.15,6
+TOM,Tomkjøring,,,false,Tom,0.0,99
