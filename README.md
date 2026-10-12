@@ -213,9 +213,9 @@ km mellom `fact_etappe` og aggregatet er 0. dbt: `PASS=62 WARN=1 ERROR=0`
 ## Forbehold
 
 1. **Nordvare AS er syntetisk.** Tallene i «Funn» beskriver generatoren,
-   ikke en reell virksomhet. Det som kan sies om virkeligheten, står i SSB-
-   tabellene; det Nordvare viser, er *hvordan* et kapasitetsregnskap må bygges
-   for å finne tapet og hvor vektdata alene ikke rekker.
+   ikke en reell virksomhet. Det som kan sies om virkeligheten, står i
+   SSB-tabellene; det Nordvare viser, er *hvordan* et kapasitetsregnskap må
+   bygges for å finne tapet og hvor vektdata alene ikke rekker.
 
 2. **Kapasitetsutnyttelse finnes ikke lenger hos SSB.** «Kapasitetsutnytting»
    ble publisert til rundt 2002, men er ikke i noen tabell i dag. Tomkjøring
