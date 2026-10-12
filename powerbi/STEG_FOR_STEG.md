@@ -265,6 +265,11 @@ desimaltegn. Målet `Tidsrom` gir derfor kulturen eksplisitt:
   bakgrunnsbildet.
 - **Årsvelgeren** er synkronisert mellom Oversikt, Hvor tapes det og
   Godsstrømmer.
+- **Bildene i README** kommer fra **File → Export → Export to PDF** i Desktop
+  (`docs/rapport.pdf`). Hver side er gjort om til PNG med `pdftoppm`, og den
+  hvite margen er skåret bort. Skjermbilder ble ikke brukt, fordi de ble bleke
+  på en HDR-skjerm. Bakgrunnsbildene er satt som sidebakgrunn og ikke som
+  *wallpaper*, ellers hadde de manglet i PDF-en.
 
 ### Kartet på Godsstrømmer
 
@@ -316,4 +321,5 @@ for stort, −30 for lite.
 - Microsoft Learn: [Power BI Desktop project report folder](https://learn.microsoft.com/power-bi/developer/projects/projects-report) (PBIR)
 - Microsoft Learn: [Calculation groups in Analysis Services tabular models](https://learn.microsoft.com/analysis-services/tabular-models/calculation-groups)
 - Microsoft Learn: [Use field parameters in Power BI reports](https://learn.microsoft.com/power-bi/create-reports/power-bi-field-parameters)
+- Microsoft Learn: [Export Power BI reports to PDF](https://learn.microsoft.com/power-bi/collaborate-share/end-user-pdf)
 - Chris Webb: [Parquet File Performance In Power BI/Power Query](https://blog.crossjoin.co.uk/2021/03/21/parquet-file-performance-in-power-bi-power-query/) (2021)

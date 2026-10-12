@@ -9,6 +9,8 @@ transaksjonsdatasett med datoer gjør det meningsfullt.
 Stack: Python (uttrekk og syntetiske data) → dbt + DuckDB → parquet-partisjoner
 → Power BI (`.pbip` med TMDL og PBIR).
 
+![Oversikt-siden i Power BI-rapporten](docs/bilder/oversikt.png)
+
 ---
 
 ## Rapporten
@@ -25,6 +27,17 @@ Oversikt, Hvor tapes det og Godsstrømmer.
 | Sesong | Sesongindeks for transportarbeid, tomkjøring per kvartal mot SSB, måned for måned i et varmekart og SSBs serie fra 1996 |
 | Etapper | Den inkrementelle tabellen: partisjonene, hvilke måneder som lastes på nytt og hvor sent etterregistreringene kommer |
 | Metode | Begreper, forbehold, kilder og kontrolltall som regnes i modellen |
+
+<p>
+<img src="docs/bilder/hvor-tapes-det.png" width="49%" alt="Hvor tapes det">
+<img src="docs/bilder/godsstrommer.png" width="49%" alt="Godsstrømmer">
+<img src="docs/bilder/sesong.png" width="49%" alt="Sesong">
+<img src="docs/bilder/etapper.png" width="49%" alt="Etapper">
+</p>
+
+Hele rapporten som PDF, eksportert fra Power BI Desktop:
+[`docs/rapport.pdf`](docs/rapport.pdf). Årsvelgeren står på 2025, som er
+forhåndsvalgt når rapporten åpnes.
 
 Byggeloggen for modellen og rapporten, med det som ikke virket på første
 forsøk: `powerbi/STEG_FOR_STEG.md`.
@@ -105,6 +118,8 @@ Fire feil er lagt inn med hensikt og fanges i dbt:
 ---
 
 ## Modellvalg
+
+![Metode-siden: fra kilde til rapport, oppdateringspolicy og kontrolltall](docs/bilder/metode.png)
 
 **Inkrementell faktatabell partisjonert på måned.** `fact_etappe` er
 `materialized='incremental'` med `delete+insert` på `maaned_start`. Første
@@ -269,6 +284,7 @@ powerbi/
   Nordvare_Kapasitetstap.SemanticModel/  modellen som TMDL
   Nordvare_Kapasitetstap.Report/         rapporten som PBIR, med tema og bakgrunnsbilder
   STEG_FOR_STEG.md                       byggelogg for modell og rapport
+docs/                        bildene av sidene og rapporten som PDF
 1_HENT.bat / 2_BYGG.bat / 3_NY_MAANED.bat
 ```
 
